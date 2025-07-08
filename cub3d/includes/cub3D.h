@@ -76,27 +76,32 @@ typedef struct s_assets
 	
 }t_assets;
 
-typedef struct  s_scene
+typedef struct  s_map
 {
-	char **layout; // this i will be transfering into int each one atoi '1' ==> 1 {later} 
+	char **grid; // this i will be transfering into int each one atoi '1' ==> 1 {later} 
 	int height; // nmr of rows in the map 
 	int width; // max width in the map to allocate based on it + 1 of null ; others with "\0" 
-	double spawn_x;
-	double spawn_y;
+	double map_player_x;
+	double map_player_y;
 	char spawn_side_face; //{N S W E}
 	
-}t_scene;
+}	t_map;
 
 
-typedef struct s_cub_data
+typedef struct s_game
 {
-	void *mlx_ptr;
-	void *mlx_window;
-	t_scene scene_data;
+	void *mlx;
+	void *win;
+	t_map map;
+	int	screen_width; // will be macro later
+	int	screen_height; // same
 	t_assets asset_data;
+	t_player player;
+	t_img	img;
+	t_ray 	ray;
 	//t_player player; // TODO: for mehdi to add this one; 
 
-}t_cub_data;
+}t_game;
 
 //-------- Helpers Func ----------//
 
