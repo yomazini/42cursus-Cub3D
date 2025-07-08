@@ -1,34 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools1.c                                           :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 14:42:44 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/08 22:27:43 by ymazini          ###   ########.fr       */
+/*   Created: 2024/10/30 23:08:17 by ymazini           #+#    #+#             */
+/*   Updated: 2025/07/08 21:16:48 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	ft_prt_tool()
+static int	int_len(long c)
 {
-		printf("tooooooooools \n\n");
-}
-// to free up all 
-
-void free_grid(char **grid)
-{
-	int i;
+	int	i;
 
 	i = 0;
-	if (!grid)
-		return; 
-	while (grid[i])
+	if (c <= 0)
 	{
-		free(grid[i]);
+		i++;
+		c = -c;
+	}
+	while (c)
+	{
+		c /= 10;
 		i++;
 	}
-	free(grid);
+	return (i);
+}
+
+char	*ft_itoa(int n)
+{
+	long	c;
+	char	*str;
+	int		len;
+
+	c = n;
+	len = int_len(c);
+	str = (char *)malloc (len + 1);
+	if (!str)
+		return (NULL);
+	str[len--] = '\0';
+	if (c == 0)
+		str[0] = '0';
+	if (c < 0)
+	{
+		str[0] = '-';
+		c = -c ;
+	}
+	while (c)
+	{
+		str[len--] = (c % 10) + '0';
+		c /= 10;
+	}
+	return (str);
 }

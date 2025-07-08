@@ -1,0 +1,81 @@
+
+NAME		=	cub3D
+CC			=	cc
+CFLAGS		=	-Wall -Wextra -Werror #-fsanitize=address -g3
+RM			=	rm -rf
+SRC_DIR		=	sources
+OBJ_DIR		=	obj
+INC_DIR		=	includes
+MLX_DIR		=	minilibx-linux
+
+SRCS		=	main.c \
+				parsing/parsing.c \
+				rendering/render.c \
+				tools/ft_atoi.c \
+				tools/ft_isalnum.c \
+				tools/ft_isalpha.c \
+				tools/ft_isdigit.c \
+				tools/ft_itoa.c \
+				tools/ft_lstadd_back_bonus.c \
+				tools/ft_lstadd_front_bonus.c \
+				tools/ft_lstclear_bonus.c \
+				tools/ft_lstdelone_bonus.c \
+				tools/ft_lstlast_bonus.c \
+				tools/ft_lstnew_bonus.c \
+				tools/ft_lstsize_bonus.c \
+				tools/ft_putchar_fd.c \
+				tools/ft_putstr_fd.c \
+				tools/ft_split.c \
+				tools/ft_strchr.c \
+				tools/ft_strdup.c \
+				tools/ft_strjoin.c \
+				tools/ft_strlcat.c \
+				tools/ft_strlcpy.c \
+				tools/ft_strlen.c \
+				tools/ft_strncmp.c \
+				tools/ft_strrchr.c \
+				tools/ft_strtrim.c \
+				tools/ft_substr.c \
+				tools/gnl.c \
+				tools/tools1.c \
+
+SRCS_FULL	=	$(addprefix $(SRC_DIR)/, $(SRCS))
+OBJS		=	$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS_FULL))
+
+HEADERS		=	$(INC_DIR)/cub3D.h
+
+MLX_LIB		=	$(MLX_DIR)/libmlx.a
+
+INCFLAGS	=	-I$(INC_DIR) -I$(MLX_DIR)
+
+LDFLAGS		=	-L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@echo "Linking $(NAME)..."
+	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
+	@echo "✅ $(NAME) is ready!"
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) $(INCFLAGS) -c $< -o $@
+
+mlx:
+	@echo "Building MiniLibX..."
+	@$(MAKE) -sC $(MLX_DIR)
+
+clean:
+	@echo "Cleaning object files..."
+	@$(RM) $(OBJ_DIR)
+	@echo "✅ Objects cleaned."
+
+fclean: clean
+	@echo "Cleaning executable..."
+	@$(RM) $(NAME)
+	@echo "✅ Full clean complete."
+
+re: fclean all
+
+bonus:
+	@echo "tanchofo mn ba3d hhhh"

@@ -6,14 +6,13 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:23:10 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/08 14:41:41 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/08 22:26:33 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-//# include "../MLX/minilibx.h" // TODO: later or not because will switch to mac
 # include <fcntl.h>
 # include <unistd.h> 
 # include <stdio.h>
@@ -21,10 +20,14 @@
 # include <math.h>
 # include <errno.h>
 
+//# include "../MLX/minilibx.h" // TODO: later or not because will switch to mac
+# include "../minilibx-linux/mlx.h"
+
 
 #define NAME "cub3D"
 #define TRUE 1
 #define FALSE 0
+#define BUFFER_SIZE 5
 
 # define S_KEY	1
 # define A_KEY	0
@@ -96,25 +99,83 @@ typedef struct s_game
 	int	screen_width; // will be macro later
 	int	screen_height; // same
 	t_assets asset_data;
-	t_player player;
-	t_img	img;
-	t_ray 	ray;
+//	t_player player;
+//	t_img	img;
+//	t_ray 	ray;
 	//t_player player; // TODO: for mehdi to add this one; 
 
 }t_game;
 
 //-------- Helpers Func ----------//
 
-void free_grid(char **grid);
-int  exit_game(t_cub_data *data);
+//void free_grid(char **grid);
+//int  exit_game(t_cub_data *data);
+
+//LIB
+
+// Memory and Character Functions
+int		ft_atoi(const char *str);
+int		ft_isalnum(int c);
+int		ft_isalpha(int c);
+int		ft_isdigit(int c);
+char	*ft_itoa(int n);
+void ft_putstr(char *str);
+// String Manipulation Functions
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t	ft_strlen(const char *str);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strrchr(const char *s, int c);
+char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	**ft_split(char const *s, char c);
+
+// File Descriptor Functions
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
+
+// Linked List Struct and Functions
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+
+t_list	*ft_lstnew(void *content);
+void	ft_lstadd_front(t_list **lst, t_list *new);
+int		ft_lstsize(t_list *lst);
+t_list	*ft_lstlast(t_list *lst);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstdelone(t_list *lst, void (*del)(void*));
+void	ft_lstclear(t_list **lst, void (*del)(void*));
+
+
+// GNL 
+char	*get_next_line(int fd);
+size_t	ft_strlen(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *s);
+
 
 
 //-------- Parsing Func ----------//
 
+void free_grid(char **grid);
+int  exit_game(t_game *game);
 
 
 //-------- Rendring Func ----------//
 
 
 
+//-------- testing makefile relink and functionality ----------//
+	void ft_prt_pars();
+	void ft_prt_rend();
+	void ft_prt_tool();
+
+	
 #endif

@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools1.c                                           :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 14:42:44 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/08 22:27:43 by ymazini          ###   ########.fr       */
+/*   Created: 2024/11/07 19:58:15 by ymazini           #+#    #+#             */
+/*   Updated: 2025/07/08 21:16:48 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	ft_prt_tool()
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-		printf("tooooooooools \n\n");
-}
-// to free up all 
+	t_list	*temp;
 
-void free_grid(char **grid)
-{
-	int i;
-
-	i = 0;
-	if (!grid)
-		return; 
-	while (grid[i])
+	if (!lst || !*lst || !del)
+		return ;
+	while (*lst)
 	{
-		free(grid[i]);
-		i++;
+		temp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = temp;
 	}
-	free(grid);
+	*lst = NULL;
 }

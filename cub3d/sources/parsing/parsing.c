@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools1.c                                           :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 14:42:44 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/08 22:27:43 by ymazini          ###   ########.fr       */
+/*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
+/*   Updated: 2025/07/08 21:14:49 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	ft_prt_tool()
+void	ft_prt_pars()
 {
-		printf("tooooooooools \n\n");
+	printf("this is parseee\n\n");
 }
-// to free up all 
 
-void free_grid(char **grid)
-{
-	int i;
-
-	i = 0;
-	if (!grid)
-		return; 
-	while (grid[i])
-	{
-		free(grid[i]);
-		i++;
-	}
-	free(grid);
-}
+//validate_filename(char *filename)
+//{
+//	
+//	
+//}

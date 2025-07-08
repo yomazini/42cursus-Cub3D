@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools1.c                                           :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 14:42:44 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/08 22:27:43 by ymazini          ###   ########.fr       */
+/*   Created: 2024/10/28 15:54:39 by ymazini           #+#    #+#             */
+/*   Updated: 2025/07/08 21:16:48 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	ft_prt_tool()
+int	ft_isalpha(int c)
 {
-		printf("tooooooooools \n\n");
-}
-// to free up all 
-
-void free_grid(char **grid)
-{
-	int i;
-
-	i = 0;
-	if (!grid)
-		return; 
-	while (grid[i])
-	{
-		free(grid[i]);
-		i++;
-	}
-	free(grid);
+	return ((c >= 65 && c <= 90) || (c >= 97 && c <= 122));
 }

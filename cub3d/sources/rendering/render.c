@@ -6,9 +6,13 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:42:51 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/08 14:42:53 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/08 20:26:25 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
+void	ft_prt_rend()
+{
+	printf("this is render\n\n");
+}

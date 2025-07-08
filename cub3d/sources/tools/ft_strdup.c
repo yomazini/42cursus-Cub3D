@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools1.c                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 14:42:44 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/08 22:27:43 by ymazini          ###   ########.fr       */
+/*   Created: 2024/10/30 22:04:58 by ymazini           #+#    #+#             */
+/*   Updated: 2025/07/08 21:17:47 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	ft_prt_tool()
+char	*ft_strdup(const char *src)
 {
-		printf("tooooooooools \n\n");
-}
-// to free up all 
-
-void free_grid(char **grid)
-{
-	int i;
+	char	*dup;
+	size_t	len;
+	size_t	i;
 
 	i = 0;
-	if (!grid)
-		return; 
-	while (grid[i])
+	len = ft_strlen(src);
+	dup = (char *)malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	while (i < len)
 	{
-		free(grid[i]);
+		dup[i] = src[i];
 		i++;
 	}
-	free(grid);
+	dup[i] = '\0';
+	return (dup);
 }

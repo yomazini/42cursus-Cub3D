@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools1.c                                           :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 14:42:44 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/08 22:27:43 by ymazini          ###   ########.fr       */
+/*   Created: 2024/10/30 18:01:47 by ymazini           #+#    #+#             */
+/*   Updated: 2025/07/08 21:16:48 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	ft_prt_tool()
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-		printf("tooooooooools \n\n");
-}
-// to free up all 
+	size_t	dlen;
+	size_t	slen;
+	size_t	i;
 
-void free_grid(char **grid)
-{
-	int i;
-
+	if (!dst && !dstsize)
+		return (ft_strlen(src));
+	dlen = 0;
+	if (dst)
+		dlen = ft_strlen(dst);
+	slen = ft_strlen(src);
+	if (dlen >= dstsize)
+		return (dstsize + slen);
 	i = 0;
-	if (!grid)
-		return; 
-	while (grid[i])
+	while (src[i] && (dlen + i) < dstsize - 1)
 	{
-		free(grid[i]);
+		dst[dlen + i] = src[i];
 		i++;
 	}
-	free(grid);
+	dst[dlen + i] = '\0';
+	return (dlen + slen);
 }

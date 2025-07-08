@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools1.c                                           :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 14:42:44 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/08 22:27:43 by ymazini          ###   ########.fr       */
+/*   Created: 2024/10/30 16:42:52 by ymazini           #+#    #+#             */
+/*   Updated: 2025/07/08 21:16:48 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	ft_prt_tool()
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-		printf("tooooooooools \n\n");
-}
-// to free up all 
+	size_t	slen;
+	size_t	i;
 
-void free_grid(char **grid)
-{
-	int i;
-
+	slen = ft_strlen(src);
 	i = 0;
-	if (!grid)
-		return; 
-	while (grid[i])
+	if (dstsize == 0)
+		return (slen);
+	while (src[i] && i < dstsize - 1)
 	{
-		free(grid[i]);
+		dst[i] = src[i];
 		i++;
 	}
-	free(grid);
+	dst[i] = '\0';
+	return (slen);
 }

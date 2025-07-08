@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools1.c                                           :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/08 14:42:44 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/08 22:27:43 by ymazini          ###   ########.fr       */
+/*   Created: 2024/10/31 17:43:11 by ymazini           #+#    #+#             */
+/*   Updated: 2025/07/08 21:15:34 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	ft_prt_tool()
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-		printf("tooooooooools \n\n");
-}
-// to free up all 
+	size_t	i;
+	size_t	j;
+	char	*ptr;
+	size_t	slen;
 
-void free_grid(char **grid)
-{
-	int i;
-
-	i = 0;
-	if (!grid)
-		return; 
-	while (grid[i])
-	{
-		free(grid[i]);
-		i++;
-	}
-	free(grid);
+	if (!s)
+		return (NULL);
+	slen = ft_strlen(s);
+	if (start >= slen)
+		return (ft_strdup(""));
+	if (len > slen - start)
+		len = slen - start;
+	ptr = (char *)malloc(len + 1);
+	if (!ptr)
+		return (NULL);
+	i = start;
+	j = 0;
+	while (s[i] && j < len)
+		ptr[j++] = s[i++];
+	ptr[j] = '\0';
+	return (ptr);
 }
