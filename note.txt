@@ -1,0 +1,17 @@
+
+i have several Questions and notes from Pomododo 1 while i was doing it; 
+
+-------
+
+1/  
+ning of the int is_set in the s_rgb and exmpale of it wall_textures and checker_gflag in the assets and examples of them meaning of the spawn in the scene meaning of mlx_insteance and mlx_window 
+2/ 
+i
+3/ can you add the the player struct that mehdi will do list me all those to added it to him;
+
+4/
+
+5/
+
+6/
+
