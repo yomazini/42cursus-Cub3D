@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:23:10 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/08 22:26:33 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/09 23:06:46 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 #define TRUE 1
 #define FALSE 0
 #define BUFFER_SIZE 5
+#define WALL '1'
+#define FLOOR '0'
+
 
 # define S_KEY	1
 # define A_KEY	0
@@ -39,7 +42,6 @@
 # define UP_KEY		126
 # define RIGHT_KEY	124
 # define KEY_LEFT	123
-
 
 
 //------------------//
@@ -164,8 +166,11 @@ char	*ft_strdup(const char *s);
 
 //-------- Parsing Func ----------//
 
-void free_grid(char **grid);
-int  exit_game(t_game *game);
+
+
+
+//void free_grid(char **grid);
+//int  exit_game(t_game *game);
 
 
 //-------- Rendring Func ----------//
