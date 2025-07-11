@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:23:10 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/09 23:06:46 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/11 22:48:40 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@
 //------------------//
 
 
-
-
-
 // this will hold RGB in the map sep by comma
 typedef struct s_rgb
 {
@@ -69,15 +66,9 @@ typedef struct s_assets
 	char *west_tex_path;
 	t_rgb floor_rgb;
 	t_rgb ceilllig_rgb;
-	void *wall_textures[4];  // this will hold actual texture images once they are loaded by the MiniLibX library
-    //when finds the line NO ./textures/wall.xpm and stores the path in north_tex_path.
-	//  Later, Mehdi's call mlx_xpm_file_to_image() using that path, and store the resulting image pointer in data.
-	// It centralizes all loaded texture data. (e.g., index 0 for North, 1 for South, etc.) without needing to know the file paths.
+	void *wall_textures[4]; 
 
-
-	int checker_flag; // track if all identifreir found better
-	// i will be set it as 1 and always multiply * 2 {(1*2) 6 times} ==> {(2 - 4 - 8 - 16 - 32 - 64 )} 
-	// NO_FLAG = 1, SO_FLAG = 2, WE_FLAG = 4, EA_FLAG = 8, F_FLAG = 16, C_FLAG = 32 and at the end check if equal 64 or otherswise get another structts and each one set as TRUE
+	int checker_flag; 
 	
 }t_assets;
 
@@ -93,6 +84,17 @@ typedef struct  s_map
 }	t_map;
 
 
+typedef struct  s_id_checker
+{
+	int no;
+	int ea;
+	int so;
+	int f;
+	int we;
+	int c
+}t_id_checker;
+
+
 typedef struct s_game
 {
 	void *mlx;
@@ -105,13 +107,19 @@ typedef struct s_game
 //	t_img	img;
 //	t_ray 	ray;
 	//t_player player; // TODO: for mehdi to add this one; 
-
+	t_id_checker checklist; 
+	
+	
 }t_game;
 
 //-------- Helpers Func ----------//
 
-//void free_grid(char **grid);
+
+
+	
+void free_grid(char **grid);
 //int  exit_game(t_cub_data *data);
+void exit_with_error(char *message, t_game *game);
 
 //LIB
 

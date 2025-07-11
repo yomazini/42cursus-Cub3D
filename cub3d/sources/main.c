@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/09 23:24:39 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/11 22:40:35 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 
 void    separate_file_content(t_list *all_lines, t_list **id_lines, t_list **map_lines);
+ void	parse_texture(char **tokens, t_game *data);
+ void	parse_color(char **tokens, t_game *data);
+ void	validate_all_identifiers_found(t_game *data);
+ int	count_tokens(char **tokens);
+void exit_with_error(char *message, t_game *game);
 
+void parse_identifiers(t_list *id_lines, t_game *data);
 
 char *ft_trim_new_line(char *line)
 {
@@ -118,9 +124,163 @@ void    separate_file_content(t_list *all_lines, t_list **id_lines, t_list **map
 	}
 }
 
+ int	count_tokens(char **tokens)
+{
+	int i = 0;
+	if (!tokens)
+		return 0;
+	while (tokens[i])
+		i++;
+	return i ;
+}
+
+void parse_identifiers(t_list *id_lines, t_game *data)
+{
+	t_list *current;
+	char **tokens;
+
+	current = id_lines;
+	while(current)
+	{
+		tokens = ft_split((char *)current->content,' ');
+		if (!tokens)
+			exit_with_error("malloc failed here",data);
+		if (count_tokens(tokens) != 2)
+			exit_with_error("error in the number of tokens ",data);
+		if ( ft_strncmp(tokens[0],"NO",3) == 0  || ft_strncmp(tokens[0],"SO",3) == 0
+				|| ft_strncmp(tokens[0],"SO",3) == 0 || ft_strncmp(tokens[0],"WE",3) == 0)
+			parse_texture(tokens,data);
+		else if (ft_strncmp(tokens[0],"F",2) == 0 || ft_strncmp(tokens[0],"C",2) == 0 )
+			parse_color(tokens,data);
+		else 
+			exit_with_error("Unkown identifire in the file",data);
+		
+		free_grid(tokens);
+		current = current->next;
+	}
+	validate_all_identifiers_found(data);
+
+}
+
+ void	parse_color(char **tokens, t_game *data)
+ {
+	char **rgb_values;
+	t_rgb *color_strcut;
+	int r;
+	int g;
+	int b;
+	
+	rgb_values = ft_split(tokens[1], ',');
+	if (!rgb_values || count_tokens(rgb_values) != 3)
+		exit_with_error("problem in RGB file",data);
+	r = ft_atoi(rgb_values[0]);
+	g = ft_atoi(rgb_values[1]);
+	b = ft_atoi(rgb_values[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		exit_with_error("RGB color value out of range 0 - 255",data);
+	if (ft_strncmp("F",tokens[0],2) == 0)
+	{
+		if (data->checklist.f == 1)
+			exit_with_error("Duplication in the identifiesrs F C ",data);
+		data->checklist.f = 1;
+		data->asset_data.floor_rgb.red = r;
+		data->asset_data.floor_rgb.blue = b;
+		data->asset_data.floor_rgb.green = g;
+		data->asset_data.floor_rgb.is_set = 1;
+	}
+	if (ft_strncmp("C",tokens[0],2) == 0)
+	{
+		if (data->checklist.c == 1)		
+			exit_with_error("Duplication in the identifiesrs F C ",data);
+		data->checklist.c = 1;
+		data->asset_data.ceilllig_rgb.red = r;
+		data->asset_data.ceilllig_rgb.blue = b;
+		data->asset_data.ceilllig_rgb.green = g;
+		data->asset_data.ceilllig_rgb.is_set = 1;
+	}
+	free_grid(rgb_values);
+}
+
+
+void	validate_all_identifiers_found(t_game *data)
+{
+	if (!data->checklist.c || !data->checklist.f 
+		|| !data->checklist.we || !data->checklist.ea
+		|| !data->checklist.no || !data->checklist.so
+	)
+		exit_with_error("the Identifier are not competed check them",data);	
+}
+
+
+ void	parse_texture(char **tokens, t_game *data)
+{
+	char *id;
+	char *path;
+	int fd;
+
+	id = tokens[0];
+	path = tokens[1];
+
+	fd = open(path,O_RDONLY);
+	if (fd < 0)
+		// TODO: Exit WITH ERROR
+	close(fd);
+		
+	// NO SO WE EA
+	if (ft_strncmp("NO",id,3) == 0)
+	{
+		if (data->checklist.no == 1)
+			exit_with_error("duplication of Identifier in map ",data);
+	
+		data->checklist.no = 1;
+		data->asset_data.north_tex_path = ft_strdup(path);
+		// if (!data->asset_data.north_tex_path)
+			// here free the prev and then call exit_with_error and return && return (NULL);
+	
+	}
+	if (ft_strncmp("SO",id,3) == 0)
+	{
+		if (data->checklist.so == 1)
+			exit_with_error("duplication of Identifier in map ",data);
+		data->checklist.so = 1;
+		data->asset_data.north_tex_path = ft_strdup(path);
+		// TODO: PROTET the dup if faild malloc			
+		
+	}
+	if (ft_strncmp("WE",id,3) == 0)
+	{
+		if (data->checklist.we == 1)
+			exit_with_error("duplication of Identifier in map ",data);
+		
+		data->checklist.we = 1;
+		data->asset_data.west_tex_path = ft_strdup(path);
+		// TODO: protect her 
+	}
+	
+	if (ft_strncmp("EA",id,3) == 0)
+	{
+		if (data->checklist.ea == 1)
+			exit_with_error("duplication of Identifier in map ",data);
+		
+		data->checklist.ea = 1;
+		data->asset_data.east_tex_path = ft_strdup(path);
+		// TODO: protect her 
+	}
+	
+
+}
+
 int main(int ac, char **av)
 {
 	t_game game;
+	
+	game.checklist.so = 0;
+	game.checklist.no = 0;
+	game.checklist.we = 0;
+	game.checklist.ea = 0;
+	game.asset_data.ceilllig_rgb.is_set = 0;
+	game.asset_data.floor_rgb.is_set = 0;
+	
 	(void)game;
 	(void)av;
 	t_list *head_in_main;
