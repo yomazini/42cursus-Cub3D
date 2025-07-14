@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/11 22:40:35 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/14 11:22:56 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,35 +306,74 @@ int main(int ac, char **av)
 	}
 	head_in_main = read_file_to_list(av[1]);
 	to_freee = head_in_main;
-	separate_file_content(head_in_main, &id_lines,&map_lines );
+	separate_file_content(head_in_main, &id_lines,&map_lines);
 
-	printf("\n\n\n----this is the first one------\n\n\n");
+	// printf("\n\n\n----this is the first one------\n\n\n");
 	
-	while (head_in_main)
-	{
-		printf("%s\n",(char *)head_in_main->content);
-    	head_in_main = head_in_main->next; // Move to the next node
-	}
-	printf("\n\n\n-----this is the 6 componenmts-----\n\n\n");
-	while (id_lines)
-	{
-			printf("%s\n",(char *)id_lines->content);
-			id_lines = id_lines->next;			
-	}
+	// while (head_in_main)
+	// {
+	// 	printf("%s\n",(char *)head_in_main->content);
+    // 	head_in_main = head_in_main->next; // Move to the next node
+	// }
+	// printf("\n\n\n-----this is the 6 componenmts-----\n\n\n");
+	// while (id_lines)
+	// {
+	// 		printf("%s\n",(char *)id_lines->content);
+	// 		id_lines = id_lines->next;			
+	// }
 	
 		
-	printf("\n\n\n-----this si the map-----\n\n\n");
-		while (map_lines)
-	{
-			printf("%s\n",(char *)map_lines->content);
-			map_lines = map_lines->next;
+	// printf("\n\n\n-----this si the map-----\n\n\n");
+	// 	while (map_lines)
+	// {
+	// 		printf("%s\n",(char *)map_lines->content);
+	// 		map_lines = map_lines->next;
 			
-	}	
+	// }	
 
-	printf("\n\n\n----------\n\n\n");
+	// printf("\n\n\n----------\n\n\n");
 	
 	ft_lstclear(&to_freee,free);
 	
 	ft_prt_tool();
 
+	//* mehdi Part______________________
+	
+	char map[11][15] = {
+    {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
+    {'1','0','0','0','0','0','0','0','0','0','0','0','1','0','1'},
+    {'1','0','0','1','0','1','0','0','0','0','0','0','1','0','1'},
+    {'1','0','1','1','1','0','0','0','0','0','1','0','1','0','1'},
+    {'1','0','0','0','0','0','0','0','0','0','1','0','1','0','1'},
+    {'1','0','0','0','0','0','0','0','1','1','1','1','1','0','1'},
+    {'1','0','0','0','0','0','0','0','0','0','0','0','0','0','1'},
+    {'1','0','0','0','0','0','0','0','0','0','0','0','0','0','1'},
+    {'1','1','1','1','1','1','0','0','0','1','1','1','1','0','1'},
+    {'1','0','0','0','0','0','0','0','0','0','0','0','0','0','1'},
+    {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}
+	};
+
+	int i = 0, j = 0;
+
+	game.map.height = 11;
+	game.map.width = 16;
+
+	game.player.x = 1.5 * TILE_SIZE; 
+	game.player.y = 1.5 * TILE_SIZE;
+
+	game.map.grid = malloc(sizeof(char *) * game.map.height);
+    if (!game.map.grid)
+		return (EXIT_FAILURE);
+    for (int i = 0; i < game.map.height; i++) 
+	{
+        game.map.grid[i] = malloc(sizeof(char) * game.map.width);
+        if (!game.map.grid[i])
+			return (EXIT_FAILURE);
+        for (int j = 0; j < game.map.width - 1; j++){
+             game.map.grid[i][j] = map[i][j];
+        }
+         game.map.grid[i][game.map.width - 1] = '\0'; 
+    }
+	
+	intialize_mlx(&game);
 }

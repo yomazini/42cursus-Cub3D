@@ -6,11 +6,12 @@ RM			=	rm -rf
 SRC_DIR		=	sources
 OBJ_DIR		=	obj
 INC_DIR		=	includes
-MLX_DIR		=	minilibx-linux
+MLX_DIR		=	minilibx_opengl
 
 SRCS		=	main.c \
 				parsing/parsing.c \
 				rendering/render.c \
+				rendering/intialize_mlx.c \
 				tools/ft_atoi.c \
 				tools/ft_isalnum.c \
 				tools/ft_isalpha.c \
@@ -48,7 +49,11 @@ MLX_LIB		=	$(MLX_DIR)/libmlx.a
 
 INCFLAGS	=	-I$(INC_DIR) -I$(MLX_DIR)
 
-LDFLAGS		=	-L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+# for lunix
+# LDFLAGS		=	-L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+
+# for macos
+LDFLAGS		=	-L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:42:44 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/11 22:49:51 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/14 10:43:45 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_prt_tool()
 {
-		printf("-----------\n\n\n\n\ntooooooooools \n\n");
+		// printf("-----------\n\n\n\n\ntooooooooools \n\n");
 }
 // to free up all 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:23:10 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/11 22:48:40 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/14 10:44:07 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,16 @@
 # include <stdlib.h>
 # include <math.h>
 # include <errno.h>
+# include <stdbool.h>
 
 //# include "../MLX/minilibx.h" // TODO: later or not because will switch to mac
-# include "../minilibx-linux/mlx.h"
+# include "../minilibx_opengl/mlx.h"
 
+// # include "../minilibx-linux/mlx.h"
+
+#define WINDOW_HEIGHT 720
+#define WINDOW_WIDTH 1280
+#define TILE_SIZE 32
 
 #define NAME "cub3D"
 #define TRUE 1
@@ -91,8 +97,38 @@ typedef struct  s_id_checker
 	int so;
 	int f;
 	int we;
-	int c
+	int c;
 }t_id_checker;
+
+typedef struct s_imag
+{
+	void	*img_ptr;
+	char	*addr;
+	int		bpp; // Bits per pixel x - COL
+	int		line_len; // Bytes per line y - ROWS
+	int		endian;
+}	t_img;
+
+typedef struct s_ray
+{
+	float	ray_angle;
+	float	wall_hit_x;
+	float	wall_hit_y;
+	float	distance;
+	bool	was_hit_vertical;
+}	t_ray;
+
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	rotation_angle;
+	int		turn_direction; // -1 for left, +1 for right
+	int    strafe_direction;
+	int		walk_direction; // -1 for back, +1 for forward 
+	float	move_speed;
+	float	rotation_speed;
+}	t_player;
 
 
 typedef struct s_game
@@ -103,10 +139,9 @@ typedef struct s_game
 	int	screen_width; // will be macro later
 	int	screen_height; // same
 	t_assets asset_data;
-//	t_player player;
-//	t_img	img;
-//	t_ray 	ray;
-	//t_player player; // TODO: for mehdi to add this one; 
+	t_img	img;
+	t_ray 	ray;
+	t_player player; // TODO: for mehdi to add this one; 
 	t_id_checker checklist; 
 	
 	
@@ -176,18 +211,18 @@ char	*ft_strdup(const char *s);
 
 
 
-
 //void free_grid(char **grid);
 //int  exit_game(t_game *game);
 
 
 //-------- Rendring Func ----------//
-
+bool	intialize_mlx(t_game *game);
+void	render(t_game *game);
 
 
 //-------- testing makefile relink and functionality ----------//
 	void ft_prt_pars();
-	void ft_prt_rend();
+	// void ft_prt_rend();
 	void ft_prt_tool();
 
 	
