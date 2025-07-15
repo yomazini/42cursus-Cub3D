@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:09 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/15 20:36:35 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/15 21:11:33 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	parse_identifiers(t_list *id_lines, t_game *data)
 			|| !ft_strncmp(tokens[0], "EA", 3) || !ft_strncmp(tokens[0], "WE", 3))
 			parse_texture(tokens,data);
 		else if (!ft_strncmp(tokens[0], "F", 2) || !ft_strncmp(tokens[0], "C", 2))
-			parse_color(tokens,data);
+			printf("\n\n\n\n\n\n\nenter the parse color fun\n");
+			// parse_color(tokens,data);
 		else
 			exit_with_error("Unkown identifire in the file",data);		
 		free_grid(tokens);
@@ -47,7 +48,7 @@ void	parse_color(char **tokens, t_game *data)
 	int		r;
 	int		g;
 	int		b;
-
+	printf("\nenter the parse color fun\n");
 	rgb_values = ft_split(tokens[1], ',');
 	if (!rgb_values || count_tokens(rgb_values) != 3)
 		exit_with_error("problem in RGB file", data);

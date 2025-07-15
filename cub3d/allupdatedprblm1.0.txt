@@ -338,3 +338,300 @@ int	main(int ac, char **av)
 
 
 }
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/08 14:42:44 by ymazini           #+#    #+#             */
+/*   Updated: 2025/07/15 20:22:50 by ymazini          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/cub3D.h"
+
+void	free_grid(char **grid)
+{
+	int	i;
+
+	i = 0;
+	if (!grid)
+		return ;
+	while (grid[i])
+	{
+		free(grid[i]);
+		i++;
+	}
+	free(grid);
+}
+
+void	exit_with_error(char *message, t_game *data)
+{
+	ft_putstr_fd("Error:", 2);
+	ft_putstr_fd(message, 2);
+	ft_putchar_fd('\n', 2);
+	if (data)
+	{
+		// if (data->asset_data.north_tex_path)
+		// 	free(data->asset_data.north_tex_path);
+		// if (data->asset_data.south_tex_path)
+		// 	free(data->asset_data.south_tex_path);
+		// if (data->asset_data.east_tex_path)
+		// 	free(data->asset_data.east_tex_path);
+		// if (data->asset_data.west_tex_path)
+		// 	free(data->asset_data.east_tex_path);
+		// if (data->map.grid)
+		// 	free_grid(data->map.grid);
+		exit(1);
+	}
+}
+
+int	count_tokens(char **tokens)
+{
+	int	i;
+
+	i = 0;
+	if (!tokens)
+		return (0);
+	while (tokens[i])
+		i++;
+	return (i);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
+/*   Updated: 2025/07/15 20:27:03 by ymazini          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/cub3D.h"
+
+static char	*ft_trim_new_line(char *line)
+{
+	int	len;
+
+	if (!line)
+		return (NULL);
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	return (line);
+}
+
+t_list	*read_file_to_list(char *filename)
+{
+	int		fd;
+	char	*line;
+	t_list	*new_node;
+	t_list	*head_list;
+
+	head_list = NULL;
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putstr_fd("can not open the file\n", 2);
+		exit(1);
+	}
+	while (TRUE)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break;
+		new_node = ft_lstnew(ft_trim_new_line(line));
+		if (!new_node)
+		{
+			free(line);
+			ft_lstclear(&head_list, free);
+			ft_putstr_fd("malloc failed in file reading", 2);
+		}
+		ft_lstadd_back(&head_list, new_node);
+//		free(line);
+	}
+	return (close(fd), head_list);
+}
+
+int	validate_filename(char *filename)
+{
+	int str_len;
+
+	str_len = ft_strlen(filename);
+	char *extention = ".cub";
+	if (str_len < 4)
+		return (0);
+	return(ft_strncmp(filename + str_len - 4,extention, 4) == 0);
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/08 13:24:03 by ymazini           #+#    #+#             */
+/*   Updated: 2025/07/09 22:05:23 by ymazini          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/cub3D.h"
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_identifiers.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/08 13:24:06 by ymazini           #+#    #+#             */
+/*   Updated: 2025/07/15 20:30:03 by ymazini          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/cub3D.h"
+
+static int	is_line_empty(char *line)
+{
+	if (line[0] == '\n')
+		return (TRUE);
+	return (FALSE);
+}
+
+static int	is_map_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	if (line[i] == WALL)
+		return (TRUE);
+	return (FALSE);
+}
+
+void	separate_file_content(t_list *all_lines,
+			t_list **id_lines, t_list **map_lines)
+{
+	t_list	*current_node;
+	char	*line_content;
+	int		map_has_started;
+
+	map_has_started = 0;
+	current_node = all_lines;
+	while (current_node)
+	{
+		line_content = (char *)current_node->content;
+		if (is_line_empty(line_content))
+		{
+			if (map_has_started == TRUE)
+			{
+				ft_putstr_fd("line apnlty inside the map\n", 2);
+				exit (1);
+			}
+			current_node = current_node->next;
+			continue ;
+		}
+		if (map_has_started == FALSE && is_map_line(line_content))
+			map_has_started = 1;
+		if (map_has_started)
+			ft_lstadd_back(map_lines, ft_lstnew(ft_strdup(line_content)));
+		else
+			ft_lstadd_back(id_lines, ft_lstnew(ft_strdup(line_content)));
+		current_node = current_node->next;
+	}
+}
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/08 13:24:09 by ymazini           #+#    #+#             */
+/*   Updated: 2025/07/15 21:11:33 by ymazini          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/cub3D.h"
+
+void	parse_identifiers(t_list *id_lines, t_game *data)
+{
+	t_list	*current;
+	char	**tokens;
+
+	current = id_lines;
+	while (current)
+	{
+		tokens = ft_split((char *)current->content ,' ');
+		if (!tokens)
+			exit_with_error("malloc failed here", data);
+		if (count_tokens(tokens) != 2)
+			return ;
+//			exit(1);
+//			exit_with_error("error in the number of tokens ", data);
+		if (!ft_strncmp(tokens[0], "NO", 3) || !ft_strncmp(tokens[0], "SO", 3)
+			|| !ft_strncmp(tokens[0], "EA", 3) || !ft_strncmp(tokens[0], "WE", 3))
+			parse_texture(tokens,data);
+		else if (!ft_strncmp(tokens[0], "F", 2) || !ft_strncmp(tokens[0], "C", 2))
+			printf("\n\n\n\n\n\n\nenter the parse color fun\n");
+			// parse_color(tokens,data);
+		else
+			exit_with_error("Unkown identifire in the file",data);		
+		free_grid(tokens);
+		current = current->next;
+	}
+	validate_all_identifiers_found(data);
+}
+
+void	parse_color(char **tokens, t_game *data)
+{
+	char	**rgb_values;
+	t_rgb	*color_strcut;
+	int		r;
+	int		g;
+	int		b;
+	printf("\nenter the parse color fun\n");
+	rgb_values = ft_split(tokens[1], ',');
+	if (!rgb_values || count_tokens(rgb_values) != 3)
+		exit_with_error("problem in RGB file", data);
+	r = ft_atoi(rgb_values[0]);
+	g = ft_atoi(rgb_values[1]);
+	b = ft_atoi(rgb_values[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		exit_with_error("RGB color value out of range 0 - 255", data);
+	if (ft_strncmp("F", tokens[0], 2) == 0)
+	{
+		if (data->checklist.f == 1)
+			exit_with_error("Duplication in the identifiesrs F C ", data);
+		data->checklist.f = 1;
+		data->asset_data.floor_rgb.red = r;
+		data->asset_data.floor_rgb.blue = b;
+		data->asset_data.floor_rgb.green = g;
+		data->asset_data.floor_rgb.is_set = 1;
+	}
+	if (ft_strncmp("C", tokens[0], 2) == 0)
+	{
+		if (data->checklist.c == 1)		
+			exit_with_error("Duplication in the identifiesrs F C ", data);
+		data->checklist.c = 1;
+		data->asset_data.ceilllig_rgb.red = r;
+		data->asset_data.ceilllig_rgb.blue = b;
+		data->asset_data.ceilllig_rgb.green = g;
+		data->asset_data.ceilllig_rgb.is_set = 1;
+	}
+	free_grid(rgb_values);
+}
+
+void	validate_all_identifiers_found(t_game *data)
+{
+	if (!data->checklist.c || !data->checklist.f 
+		|| !data->checklist.we || !data->checklist.ea
+		|| !data->checklist.no || !data->checklist.so
+	)
+		exit_with_error("the Identifier are not competed check them", data);	
+}

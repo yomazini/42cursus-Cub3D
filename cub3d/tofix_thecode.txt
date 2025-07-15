@@ -1,6 +1,5 @@
 EA ./textures/east_texture.xpm
 WE ./textures/west_texture.xpm
-WE ./textures/west_texture.xpm
 NO ./textures/north_texture.xpm
 SO ./textures/south_texture.xpm
 
@@ -11,3 +10,8 @@ C 150,80,900
 11S0000011
 11000000011
 11111111111
+
+
+===> 
+
+
