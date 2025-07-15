@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/15 15:37:33 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/15 17:38:38 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,85 @@
 
 }
 
+
+static void	flood_fill_rec(char **grid, t_map *map_info, int y, int x)
+{
+	if (y < 0 || x < 0 || y >= map_info->height || x >= map_info->width)
+		exit_with_error("map is not closed; opened at the grid edge",NULL);
+		// map is not closed open at grid edge, NULL
+
+	if (grid[x][y] == '1' || grid[x][y] == 'V')
+		return ;
+	
+	if (grid[x][y] == ' ')
+		exit_with_error("map is not closed; floor tile become space here found spave", NULL);
+	
+	
+	flood_fill_rec(grid, map_info, y, x + 1);
+	flood_fill_rec(grid, map_info, y, x - 1);
+	flood_fill_rec(grid, map_info, y + 1, x);
+	flood_fill_rec(grid, map_info, y - 1, x);
+
+
+}	 
+
+
+void    validate_walls_are_closed(t_game *data)
+{
+	char **map_copy;
+
+	map_copy = duplicate_grid(data->map.grid, data->map.height);
+	if (!map_copy)
+		exit_with_error("Malloc failed for map copy.", data);
+	flood_fill_recursive(map_copy, &data->map,
+		(int)data->map.map_player_y, (int)data->map.map_player_x);
+	free_grid(map_copy);
+}
+
+static int	get_max_width(char **grid)
+{
+	int i = 0;
+	int max_width = 0; 
+	
+	while (grid[i])
+	{
+		if (ft_strlen(grid[i]) > max_width)
+			max_width = ft_strlen(grid[i]);	
+		i++;
+	}
+	return i ;
+}
+
+void	normalize_map_grid(t_game *data)
+{
+	char	**new_grid;
+	int		y;
+
+	data->map.width = get_max_width(data->map.grid);
+	if (data->map.width == 0)
+		exit_with_error("Map content is invalid or empty.", data);
+	
+	new_grid = malloc(sizeof(char *) * (data->map.height + 1));
+	if (!new_grid)
+		exit_with_error("Malloc failed for new grid.", data);
+
+	y = 0;
+	while (y < data->map.height)
+	{
+		new_grid[y] = malloc(sizeof(char) * (data->map.width + 1));
+		if (!new_grid[y])
+			exit_with_error("Malloc failed for new grid row.", data);
+		ft_memset(new_grid[y], ' ', data->map.width);
+		ft_memcpy(new_grid[y], data->map.grid[y], ft_strlen(data->map.grid[y]));
+		new_grid[y][data->map.width] = '\0';
+		y++;
+	}
+	new_grid[y] = NULL;
+	free_grid(data->map.grid);
+	data->map.grid = new_grid;
+}
+
+
 void	validate_map_content(t_game *data)
 {
 	int x;
@@ -86,7 +165,7 @@ void	validate_map_content(t_game *data)
 			c = data->map.grid[x][y];
 			if (!ft_strchr("NSEW01",c))
 			{
-				exit_with_error("the map has something not required",game);
+				exit_with_error("the map has something not require", data);
 			}
 			if (!ft_strchr("NSEW",c))
 			{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:23:10 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/15 15:35:07 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/15 17:04:33 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 
 
@@ -231,6 +232,13 @@ t_list *read_file_to_list(char *filename);
   
   void	validate_map_content(t_game *data);
   
+void    validate_walls_are_closed(t_game *data);
+
+void    validate_walls_are_closed(t_game *data);
+static void	flood_fill_rec(char **grid, t_map *map_info, int y, int x);
+static int	get_max_width(char **grid);
+void	normalize_map_grid(t_game *data);
+
 //-------- Helpers Func ----------//
 
 
