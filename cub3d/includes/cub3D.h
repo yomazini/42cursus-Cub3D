@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:23:10 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/15 17:04:33 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/15 20:19:50 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,18 @@
 # include <math.h>
 # include <errno.h>
 # include <stdbool.h>
-
-//# include "../MLX/minilibx.h" // TODO: later or not because will switch to mac
 # include "../minilibx_opengl/mlx.h"
-
-// # include "../minilibx-linux/mlx.h"
-
 #define WINDOW_HEIGHT 720
 #define WINDOW_WIDTH 1280
 #define TILE_SIZE 32
 #define PI 3.1415926535
 #define FOV (60 * (PI / 180.0))
-
 #define NAME "cub3D"
 #define TRUE 1
 #define FALSE 0
 #define BUFFER_SIZE 5
 #define WALL '1'
 #define FLOOR '0'
-
 
 # define KEY_W        13
 # define KEY_A         0
@@ -54,17 +47,13 @@
 
 //------------------//
 
-
-// this will hold RGB in the map sep by comma
 typedef struct s_rgb
 {
 	int red;
 	int green;
 	int blue;
-	int is_set; //  check if the F or C been found the susccessfully parsed 
+	int is_set;
 } t_rgb;
-
-// thie hils textures and color assets
 
 typedef struct s_assets
 {
@@ -75,23 +64,25 @@ typedef struct s_assets
 	t_rgb floor_rgb;
 	t_rgb ceilllig_rgb;
 	void *wall_textures[4]; 
-
 	int checker_flag; 
 	
 }t_assets;
 
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
 typedef struct  s_map
 {
-	char **grid; // this i will be transfering into int each one atoi '1' ==> 1 {later} 
-	int height; // nmr of rows in the map 
-	int width; // max width in the map to allocate based on it + 1 of null ; others with "\0" 
+	char **grid;
+	int height;
+	int width;
 	double map_player_x;
 	double map_player_y;
-	char spawn_side_face; //{N S W E}
+	char spawn_side_face;
 	int player_count;
-	
 }	t_map;
-
 
 typedef struct  s_id_checker
 {
@@ -121,9 +112,7 @@ typedef struct s_ray
 	float	horzhit_y;
 	float	verthit_x;
 	float	verthit_y;
-	
 	float	distance;
-
 	bool	is_ray_facing_up;
 	bool	is_ray_facing_down;
 	bool	is_ray_facing_left;
@@ -149,22 +138,16 @@ typedef struct s_game
 	void *mlx;
 	void *win;
 	t_map map;
-	int	screen_width; // will be macro later
-	int	screen_height; // same
+	int	screen_width;
+	int	screen_height;
 	t_assets asset_data;
 	t_img	img;
 	t_ray 	ray;
-	t_player player; // TODO: for mehdi to add this one; 
+	t_player player;
 	t_id_checker checklist; 
-	
-	
 }t_game;
 
-
-
 //LIB
-
-// Memory and Character Functions
 int		ft_atoi(const char *str);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
@@ -172,7 +155,6 @@ int		ft_isdigit(int c);
 char	*ft_itoa(int n);
 void ft_putstr(char *str);
 void	*ft_memset(void *b, int c, size_t len);
-// String Manipulation Functions
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -184,18 +166,8 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
-
-// File Descriptor Functions
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
-
-// Linked List Struct and Functions
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list;
-
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
@@ -203,9 +175,6 @@ t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
-
-
-// GNL 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -214,39 +183,31 @@ char	*ft_strdup(const char *s);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 
-
 //-------- Parsing Func ----------//
 
-void    separate_file_content(t_list *all_lines, t_list **id_lines, t_list **map_lines);
-
+void	separate_file_content(t_list *all_lines, t_list **id_lines, t_list **map_lines);
 void	create_map_grid(t_list **map_lines_head, t_game *data);
- void	parse_texture(char **tokens, t_game *data);
- void	parse_color(char **tokens, t_game *data);
- void	validate_all_identifiers_found(t_game *data);
- int	count_tokens(char **tokens);
-
-void parse_identifiers(t_list *id_lines, t_game *data);
-void    separate_file_content(t_list *all_lines, t_list **id_lines, t_list **map_lines);
-t_list *read_file_to_list(char *filename);
-  int  validate_filename(char *filename);
-  
-  void	validate_map_content(t_game *data);
-  
-void    validate_walls_are_closed(t_game *data);
-
-void    validate_walls_are_closed(t_game *data);
-static void	flood_fill_rec(char **grid, t_map *map_info, int y, int x);
-static int	get_max_width(char **grid);
+void	parse_texture(char **tokens, t_game *data);
+void	parse_color(char **tokens, t_game *data);
+void	validate_all_identifiers_found(t_game *data);
+int		count_tokens(char **tokens);
+void	parse_identifiers(t_list *id_lines, t_game *data);
+void	separate_file_content(t_list *all_lines, t_list **id_lines, t_list **map_lines);
+t_list	*read_file_to_list(char *filename);
+int		validate_filename(char *filename);
+void	validate_map_content(t_game *data);
+void	validate_walls_are_closed(t_game *data);
+void	validate_walls_are_closed(t_game *data);
+void	flood_fill_rec(t_game *data, char **grid_copy, int y, int x);
+int		get_max_width(char **grid);
 void	normalize_map_grid(t_game *data);
+
 
 //-------- Helpers Func ----------//
 
-
-
-void 	exit_with_error(char *message, t_game *game);
-void free_grid(char **grid);
-int  exit_game(t_game *game);
-
+void	exit_with_error(char *message, t_game *game);
+void	free_grid(char **grid);
+int 	exit_game(t_game *game);
 
 //-------- Rendring Func ----------//
 bool	intialize_mlx(t_game *game);
@@ -257,11 +218,4 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 bool	hit_wall(t_game *game, float x, float y);
 void	update_player(t_game *game);
 
-
-//-------- testing makefile relink and functionality ----------//
-	void ft_prt_pars();
-	// void ft_prt_rend();
-	void ft_prt_tool();
-
-	
 #endif
