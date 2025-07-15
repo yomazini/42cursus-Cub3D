@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:42:44 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/14 10:43:45 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/15 11:49:25 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,14 @@ void	exit_with_error(char *message, t_game *data)
 
 	}
 }
+
+ int	count_tokens(char **tokens)
+{
+	int i = 0;
+	if (!tokens)
+		return 0;
+	while (tokens[i])
+		i++;
+	return i ;
+}
+

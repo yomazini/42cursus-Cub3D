@@ -1,6 +1,6 @@
 
 NAME		=	cub3D
-CC			=	cc
+CC			=	cc -fsanitize=address -g3
 CFLAGS		=	#-fsanitize=address -g3 #-Wall -Wextra -Werror -fsanitize=address -g3
 RM			=	rm -rf
 SRC_DIR		=	sources
@@ -10,6 +10,9 @@ MLX_DIR		=	minilibx_opengl
 
 SRCS		=	main.c \
 				parsing/parsing.c \
+				parsing/read_file.c \
+				parsing/validate_identifiers.c \
+				parsing/validate_map.c \
 				rendering/render.c \
 				rendering/intialize_mlx.c \
 				tools/ft_atoi.c \
