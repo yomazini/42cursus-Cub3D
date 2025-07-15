@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/15 13:52:17 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:39:18 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_list *read_file_to_list(char *filename)
 			ft_putstr_fd("malloc failed in file reading",2);
 		}
 		ft_lstadd_back(&head_list, new_node);
-		free(line);
+//		free(line);
 	}
 	close(fd);
 	return (head_list);

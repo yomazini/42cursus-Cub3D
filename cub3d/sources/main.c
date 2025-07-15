@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/15 13:57:11 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/15 15:02:57 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,41 @@
 
 }
 
+void	validate_map_content(t_game *data)
+{
+	int x;
+	int y;
+	char c;
+	
+	data->map.player_count = 0;
+	y = 0;
+
+	while (data->map.grid[x])
+	{
+		x = 0;
+		while (data->map.grid[x][y])
+		{
+			c = data->map.grid[x][y];
+			if (!ft_strchr("NSEW01",c))
+			{
+				exit_with_error("the map has something not required",game);
+			}
+			if (!ft_strchr("NSEW",c))
+			{
+				data->map.map_player_x = x;
+				data->map.map_player_y = y;
+				data->map.player_count++;
+				data->map.spawn_side_face = c;
+				data->map.grid[x][y] = '0';
+			}
+			x++;
+		}
+		y++;
+	}
+	if (data->map.player_count != 1)
+		exit_with_error("ops there is more than one player",data);
+}
+
 void	create_map_grid(t_list **map_lines_head, t_game *data)
 {
 	t_list *current; 
@@ -99,8 +134,7 @@ void	create_map_grid(t_list **map_lines_head, t_game *data)
 
 int main(int ac, char **av)
 {
-
- t_game  game;
+t_game  game;
     t_list  *all_lines;
     t_list  *id_lines;
     t_list  *map_lines;
@@ -126,24 +160,26 @@ int main(int ac, char **av)
     id_lines = NULL;
     map_lines = NULL;
     separate_file_content(all_lines, &id_lines, &map_lines);
+    printf("---PARSED 1---\n");
     
     // 3. The original list is no longer needed. Free it immediately.
     ft_lstclear(&all_lines, free);
 
     // 4. Parse the identifier list, then free it.
     parse_identifiers(id_lines, &game);
+    printf("---PARSED 2---\n");
     ft_lstclear(&id_lines, free);
     
     // 5. Create the map grid from the map list.
     //    (The create_map_grid function will free the map_lines list itself).
+    printf("---PARSED M3---\n");
     create_map_grid(&map_lines, &game);
 
     // 6. You can now proceed with map validation...
-    printf("---PARSED MAP---\n");
     int i = 0;
     while(game.map.grid[i])
     {
-        printf("%s\n", game.map.grid[i]);
+        printf("==>%s\n", game.map.grid[i]);
         i++;
     }
     
@@ -151,6 +187,8 @@ int main(int ac, char **av)
     free_grid(game.map.grid);
     // You would also free your texture paths here.
 
+    return (0);
+	
 
 	//* mehdi Part______________________
 	

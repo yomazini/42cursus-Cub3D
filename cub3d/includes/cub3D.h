@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:23:10 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/15 13:55:41 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:56:53 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct  s_map
 	double map_player_x;
 	double map_player_y;
 	char spawn_side_face; //{N S W E}
+	int player_count;
 	
 }	t_map;
 
@@ -215,6 +216,8 @@ void parse_identifiers(t_list *id_lines, t_game *data);
 void    separate_file_content(t_list *all_lines, t_list **id_lines, t_list **map_lines);
 t_list *read_file_to_list(char *filename);
   int  validate_filename(char *filename);
+  
+  void	validate_map_content(t_game *data);
   
 //-------- Helpers Func ----------//
 

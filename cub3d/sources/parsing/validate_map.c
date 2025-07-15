@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:09 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/15 13:31:01 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:46:30 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void parse_identifiers(t_list *id_lines, t_game *data)
 		if (!tokens)
 			exit_with_error("malloc failed here",data);
 		if (count_tokens(tokens) != 2)
-			exit_with_error("error in the number of tokens ",data);
+//			exit(1);
+			return ;
+//			exit_with_error("error in the number of tokens ",data);
 		if ( ft_strncmp(tokens[0],"NO",3) == 0  || ft_strncmp(tokens[0],"SO",3) == 0
 				|| ft_strncmp(tokens[0],"EA",3) == 0 || ft_strncmp(tokens[0],"WE",3) == 0)
 			parse_texture(tokens,data);
