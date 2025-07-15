@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:23:10 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/14 10:44:07 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/15 14:45:45 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 #define WINDOW_HEIGHT 720
 #define WINDOW_WIDTH 1280
 #define TILE_SIZE 32
+#define PI 3.1415926535
+#define FOV (60 * (PI / 180.0))
 
 #define NAME "cub3D"
 #define TRUE 1
@@ -38,16 +40,16 @@
 #define FLOOR '0'
 
 
-# define S_KEY	1
-# define A_KEY	0
-# define W_KEY	13
-# define D_KEY	2
-# define ESC_KEY	53
+# define KEY_W        13
+# define KEY_A         0
+# define KEY_S         1
+# define KEY_D         2
+# define KEY_ESC      53
 
-# define DOWN_KEY	125
-# define UP_KEY		126
-# define RIGHT_KEY	124
-# define KEY_LEFT	123
+# define KEY_UP      126
+# define KEY_LEFT    123
+# define KEY_RIGHT   124
+# define KEY_DOWN    125
 
 
 //------------------//
@@ -114,8 +116,18 @@ typedef struct s_ray
 	float	ray_angle;
 	float	wall_hit_x;
 	float	wall_hit_y;
+	float	horzhit_x;
+	float	horzhit_y;
+	float	verthit_x;
+	float	verthit_y;
+	
 	float	distance;
-	bool	was_hit_vertical;
+
+	bool	is_ray_facing_up;
+	bool	is_ray_facing_down;
+	bool	is_ray_facing_left;
+	bool	is_ray_facing_right;
+	// bool	was_hit_vertical;
 }	t_ray;
 
 typedef struct s_player
@@ -217,7 +229,12 @@ char	*ft_strdup(const char *s);
 
 //-------- Rendring Func ----------//
 bool	intialize_mlx(t_game *game);
-void	render(t_game *game);
+void	ft_render(t_game *game);
+float	normalize_angle(float angle);
+void	cast_rays(t_game *game);
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+bool	hit_wall(t_game *game, float x, float y);
+void	update_player(t_game *game);
 
 
 //-------- testing makefile relink and functionality ----------//

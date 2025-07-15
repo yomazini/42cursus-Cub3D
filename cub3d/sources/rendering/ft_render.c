@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   ft_render.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:42:51 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/14 11:31:16 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:25:24 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,13 @@ void draw_player(t_game *game)
 	}
 }
 
-void	render(t_game *game)
+
+void	ft_render(t_game *game)
 {
+	mlx_clear_window(game->mlx, game->win);
+	update_player(game);
 	draw_map(game);
 	draw_player(game);
+	cast_rays(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
 }
