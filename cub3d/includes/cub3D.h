@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:23:10 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/15 14:45:45 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/15 15:35:07 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct  s_map
 	double map_player_x;
 	double map_player_y;
 	char spawn_side_face; //{N S W E}
+	int player_count;
 	
 }	t_map;
 
@@ -159,14 +160,7 @@ typedef struct s_game
 	
 }t_game;
 
-//-------- Helpers Func ----------//
 
-
-
-	
-void free_grid(char **grid);
-//int  exit_game(t_cub_data *data);
-void exit_with_error(char *message, t_game *game);
 
 //LIB
 
@@ -177,6 +171,7 @@ int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 char	*ft_itoa(int n);
 void ft_putstr(char *str);
+void	*ft_memset(void *b, int c, size_t len);
 // String Manipulation Functions
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);
@@ -221,10 +216,28 @@ char	*ft_strdup(const char *s);
 
 //-------- Parsing Func ----------//
 
+void    separate_file_content(t_list *all_lines, t_list **id_lines, t_list **map_lines);
+
+void	create_map_grid(t_list **map_lines_head, t_game *data);
+ void	parse_texture(char **tokens, t_game *data);
+ void	parse_color(char **tokens, t_game *data);
+ void	validate_all_identifiers_found(t_game *data);
+ int	count_tokens(char **tokens);
+
+void parse_identifiers(t_list *id_lines, t_game *data);
+void    separate_file_content(t_list *all_lines, t_list **id_lines, t_list **map_lines);
+t_list *read_file_to_list(char *filename);
+  int  validate_filename(char *filename);
+  
+  void	validate_map_content(t_game *data);
+  
+//-------- Helpers Func ----------//
 
 
-//void free_grid(char **grid);
-//int  exit_game(t_game *game);
+
+void 	exit_with_error(char *message, t_game *game);
+void free_grid(char **grid);
+int  exit_game(t_game *game);
 
 
 //-------- Rendring Func ----------//
