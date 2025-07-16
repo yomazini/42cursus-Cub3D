@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 09:14:57 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/16 08:32:45 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/16 13:26:41 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ bool	hit_wall(t_game *game, float x, float y)
 	return (game->map.grid[map_y][map_x] == '1');
 }
 
-void	initiatize_rayfacing(t_game *game, float ray_angle)
+void	initiatize_rayfacing(t_game *game, float ray_angle, int i)
 {
-	game->ray.is_ray_facing_down = ray_angle > 0 && ray_angle < PI; // [0-180]
-	game->ray.is_ray_facing_up = !game->ray.is_ray_facing_down;
-	game->ray.is_ray_facing_left =  ray_angle > (PI / 2) && ray_angle < (1.5 * PI); // [90-270], [(PI / 2)-(3PI / 2)]
-	game->ray.is_ray_facing_right = !game->ray.is_ray_facing_left;
+	game->rays[i].is_ray_facing_down = ray_angle > 0 && ray_angle < PI; // [0-180]
+	game->rays[i].is_ray_facing_up = !game->rays[i].is_ray_facing_down;
+	game->rays[i].is_ray_facing_left =  ray_angle > (PI / 2) && ray_angle < (1.5 * PI); // [90-270], [(PI / 2)-(3PI / 2)]
+	game->rays[i].is_ray_facing_right = !game->rays[i].is_ray_facing_left;
 }
 
-bool	find_horizontal_intersection(t_game *game, float ray_angle)
+bool	find_horizontal_intersection(t_game *game, float ray_angle, int i)
 {
 	float	y_intercept;
 	float	x_intercept;
@@ -60,18 +60,18 @@ bool	find_horizontal_intersection(t_game *game, float ray_angle)
 	float	next_x;
 	float	next_y;
 	
-	initiatize_rayfacing(game, ray_angle);
+	initiatize_rayfacing(game, ray_angle, i);
 	y_intercept = floor(game->player.y / TILE_SIZE) * TILE_SIZE;
-	if (game->ray.is_ray_facing_down)
+	if (game->rays[i].is_ray_facing_down)
 		y_intercept += TILE_SIZE;
 	x_intercept = game->player.x + (y_intercept - game->player.y) / tan(ray_angle);
 	y_step = TILE_SIZE;
-	if (game->ray.is_ray_facing_up)
+	if (game->rays[i].is_ray_facing_up)
 		y_step *= -1;
 	x_step = TILE_SIZE / tan(ray_angle);
-	if (game->ray.is_ray_facing_left && x_step > 0)
+	if (game->rays[i].is_ray_facing_left && x_step > 0)
 		x_step *= -1;
-	if (game->ray.is_ray_facing_right && x_step < 0)
+	if (game->rays[i].is_ray_facing_right && x_step < 0)
 		x_step *= -1;
 	
 	// looping to get the x && y the the first horz hit wall
@@ -82,12 +82,12 @@ bool	find_horizontal_intersection(t_game *game, float ray_angle)
 		&& next_y >= 0 && next_y <= WINDOW_HEIGHT)
 	{
 		float y_to_check = next_y;
-		if (game->ray.is_ray_facing_up)
+		if (game->rays[i].is_ray_facing_up)
     		y_to_check -= 1; // Look at the pixel in the tile above the line
 		if (hit_wall(game, next_x, y_to_check))
 		{
-			game->ray.horzhit_x = next_x;
-			game->ray.horzhit_y = next_y;
+			game->rays[i].horzhit_x = next_x;
+			game->rays[i].horzhit_y = next_y;
 			return (true);
 			
 		}
@@ -97,7 +97,7 @@ bool	find_horizontal_intersection(t_game *game, float ray_angle)
 	return (false);
 }
 
-bool	find_vertocal_intersection(t_game *game, float ray_angle)
+bool	find_vertocal_intersection(t_game *game, float ray_angle, int i)
 {
 	float	y_intercept;
 	float	x_intercept;
@@ -106,18 +106,18 @@ bool	find_vertocal_intersection(t_game *game, float ray_angle)
 	float	next_x;
 	float	next_y;
 	
-	initiatize_rayfacing(game, ray_angle);
+	initiatize_rayfacing(game, ray_angle, i);
 	x_intercept = floor(game->player.x / TILE_SIZE) * TILE_SIZE;
-	if (game->ray.is_ray_facing_right)
+	if (game->rays[i].is_ray_facing_right)
 		x_intercept += TILE_SIZE;
 	y_intercept = game->player.y + (x_intercept - game->player.x) * tan(ray_angle);
 	x_step = TILE_SIZE;
-	if (game->ray.is_ray_facing_left)
+	if (game->rays[i].is_ray_facing_left)
 		x_step *= -1;
 	y_step = TILE_SIZE * tan(ray_angle);
-	if (game->ray.is_ray_facing_up && y_step > 0)
+	if (game->rays[i].is_ray_facing_up && y_step > 0)
 		y_step *= -1;
-	if (game->ray.is_ray_facing_down && y_step < 0)
+	if (game->rays[i].is_ray_facing_down && y_step < 0)
 		y_step *= -1;
 	
 	next_x = x_intercept;
@@ -127,14 +127,12 @@ bool	find_vertocal_intersection(t_game *game, float ray_angle)
 		&& next_y >= 0 && next_y <= WINDOW_HEIGHT)
 	{
 		float x_to_check = next_x;
-		if (game->ray.is_ray_facing_left)
-    		x_to_check -= 1; // Look at the pixel in the tile to the left of the line
+		if (game->rays[i].is_ray_facing_left)
+    		x_to_check -= 1;
 		if (hit_wall(game, x_to_check, next_y))
 		{
-			game->ray.verthit_x = next_x;
-			game->ray.verthit_y = next_y;
-			// printf("VerthitX=%.0f\t", game->ray.verthit_x);
-			// printf("VerthitY=%.0f\n", game->ray.verthit_y);
+			game->rays[i].verthit_x = next_x;
+			game->rays[i].verthit_y = next_y;
 			return (true);
 			
 		}
@@ -181,43 +179,37 @@ void draw_line(t_game *game, float x1, float y1, float x2, float y2)
     }
 }
 
-void	cast_one_ray(t_game *game , float ray_angle)
+void	cast_one_ray(t_game *game , float ray_angle, int i)
 {
 	float horz_hit_distance;
 	float vert_hit_distance;
 
-	horz_hit_distance = 1e30; // A number with 30 zeros
+	horz_hit_distance = 1e30;
     vert_hit_distance = 1e30;
-	
 	ray_angle = normalize_angle(ray_angle);
-	if (find_horizontal_intersection(game, ray_angle)){
-		// calcule the horiz dist
+	if (find_horizontal_intersection(game, ray_angle, i)){
 		horz_hit_distance = distance(game->player.x, game->player.y,
-			game->ray.horzhit_x, game->ray.horzhit_y);
-		// printf("Horz=%.0f\n", horz_hit_distance);
+			game->rays[i].horzhit_x, game->rays[i].horzhit_y);
 	}
-	if (find_vertocal_intersection(game, ray_angle)){
-		// calcule the vert dist
+	if (find_vertocal_intersection(game, ray_angle, i)){
 		vert_hit_distance = distance(game->player.x, game->player.y,
-			game->ray.verthit_x, game->ray.verthit_y);
-		// printf("Vert=%.0f\n", vert_hit_distance);
+			game->rays[i].verthit_x, game->rays[i].verthit_y);
 	}
 	if (vert_hit_distance < horz_hit_distance)
 	{
-		game->ray.distance = vert_hit_distance;
-		game->ray.wall_hit_x = game->ray.verthit_x;
-		game->ray.wall_hit_y = game->ray.verthit_y;
+		game->rays[i].distance = vert_hit_distance;
+		game->rays[i].wall_hit_x = game->rays[i].verthit_x;
+		game->rays[i].wall_hit_y = game->rays[i].verthit_y;
+		game->rays[i].was_hit_vertical = true;
 	}
 	else 
 	{
-		game->ray.distance = horz_hit_distance;
-		game->ray.wall_hit_x = game->ray.horzhit_x;
-		game->ray.wall_hit_y = game->ray.horzhit_y;
+		game->rays[i].distance = horz_hit_distance;
+		game->rays[i].wall_hit_x = game->rays[i].horzhit_x;
+		game->rays[i].wall_hit_y = game->rays[i].horzhit_y;
+		game->rays[i].was_hit_vertical = false;
 	}
-	draw_line(game, game->player.x * MINIMAP_SCALE_FACTOR,
-	game->player.y * MINIMAP_SCALE_FACTOR,
-	game->ray.wall_hit_x * MINIMAP_SCALE_FACTOR,
-	game->ray.wall_hit_y * MINIMAP_SCALE_FACTOR);
+	game->rays[i].ray_angle = ray_angle;
 }
 
 void	cast_rays(t_game *game)
@@ -231,7 +223,7 @@ void	cast_rays(t_game *game)
 	i = 0;
 	while (i < num_rays)
 	{
-		cast_one_ray(game, ray_angle);
+		cast_one_ray(game, ray_angle, i);
 		ray_angle += FOV / num_rays;
 		i++;
 	}

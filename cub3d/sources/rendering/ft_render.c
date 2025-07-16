@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:42:51 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/16 08:33:58 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/16 12:32:22 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,87 @@ void draw_player(t_game *game)
 	}
 }
 
-void	ft_three_d(t_game *game)
+/**
+  	X  = ? (Projection wall height)
+	1- Using Triangle Similarity:
+		A/B = D/C
+		D = X
+		A = actuial wall height = TILE_SIZE
+		B = distance to wall = ray distance (from raycasting)
+		C = distance from player to proj.plane = (WINDOW_WIDTH / 2) / tan(FOV / 2)
+		D = A/B * C   
+*/
+
+void	render_3d(t_game *game, int wall_top_pixel, int wall_bottom_pixel, int i)
 {
-	
+	int	y;
+
+	y = 0;
+	while (y < wall_top_pixel)
+		my_mlx_pixel_put(game, i, y++, 0x0087CEEB);
+	y = wall_top_pixel;
+	while (y < wall_bottom_pixel)
+		my_mlx_pixel_put(game, i, y++,0x00A9A9A9);
+	y = wall_bottom_pixel;
+	while (y < WINDOW_HEIGHT)
+		my_mlx_pixel_put(game, i, y++, 0xc29b3e);
 }
 
+void	render_3dproj(t_game *game)
+{
+	int	i;
+	float	dist_to_proj_plane;
+	float	projected_wall_height;
+	float	corrected_dist;
+
+	int		wall_top_pixel;
+	int		wall_bottom_pixel;
+
+	dist_to_proj_plane = (WINDOW_WIDTH / 2) / tan(FOV / 2);
+	i = 0;
+	while (i < WINDOW_WIDTH)
+	{
+		corrected_dist = game->rays[i].distance
+			* cos(game->rays[i].ray_angle - game->player.rotation_angle);
+				
+		projected_wall_height = (TILE_SIZE / corrected_dist) * dist_to_proj_plane;
+		
+		wall_top_pixel = (WINDOW_HEIGHT / 2) - (projected_wall_height / 2);
+		if (wall_top_pixel < 0)
+			wall_top_pixel = 0;
+		wall_bottom_pixel = (WINDOW_HEIGHT / 2) + (projected_wall_height / 2);
+		if (wall_bottom_pixel > WINDOW_HEIGHT)
+			wall_bottom_pixel = WINDOW_HEIGHT;
+		render_3d(game, wall_top_pixel, wall_bottom_pixel, i);
+		i++;
+	}	
+}
+
+
+void draw_minimap_rays(t_game *game)
+{
+    int i = 0;
+    while (i < WINDOW_WIDTH)
+    {
+        draw_line(
+            game,
+            game->player.x * MINIMAP_SCALE_FACTOR,
+            game->player.y * MINIMAP_SCALE_FACTOR,
+            game->rays[i].wall_hit_x * MINIMAP_SCALE_FACTOR,
+            game->rays[i].wall_hit_y * MINIMAP_SCALE_FACTOR
+        );
+        i++;
+    }
+}
 
 void	ft_render(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
-	ft_three_d(game);
 	update_player(game);
+	cast_rays(game);
+	render_3dproj(game);
 	draw_map(game);
 	draw_player(game);
-	cast_rays(game);
+	draw_minimap_rays(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
 }

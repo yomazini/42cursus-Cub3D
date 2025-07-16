@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:35:30 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/15 15:29:58 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/16 12:31:10 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,3 @@ void	update_player(t_game *game)
 	if(!hit_wall(game, new_x, new_y))
 		game->player.y = new_y;
 }
-
