@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:23:10 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/16 13:22:24 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/16 14:44:14 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@
 # include "../minilibx_opengl/mlx.h"
 #define WINDOW_HEIGHT 720
 #define WINDOW_WIDTH 1280
-#define TILE_SIZE 32
+#define TILE_SIZE 64
+#define MINIMAP_SCALE_FACTOR 0.3
+
 #define PI 3.1415926535
 #define FOV (60 * (PI / 180.0))
 #define NAME "cub3D"
 #define TRUE 1
 #define FALSE 0
-#define MINIMAP_SCALE_FACTOR 0.5
 #define BUFFER_SIZE 5
 #define WALL '1'
 #define FLOOR '0'
@@ -118,7 +119,7 @@ typedef struct s_ray
 	bool	is_ray_facing_down;
 	bool	is_ray_facing_left;
 	bool	is_ray_facing_right;
-	// bool	was_hit_vertical;
+	bool	was_hit_vertical;
 }	t_ray;
 
 typedef struct s_player
@@ -143,7 +144,7 @@ typedef struct s_game
 	int	screen_height;
 	t_assets asset_data;
 	t_img	img;
-	t_ray 	ray;
+	t_ray 	rays[WINDOW_WIDTH];
 	t_player player;
 	t_id_checker checklist; 
 }t_game;
@@ -219,5 +220,6 @@ void	cast_rays(t_game *game);
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 bool	hit_wall(t_game *game, float x, float y);
 void	update_player(t_game *game);
+void 	draw_line(t_game *game, float x1, float y1, float x2, float y2);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/16 14:13:00 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/16 14:48:32 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -353,6 +353,20 @@ void	run_parser(char *filename, t_game *game)
 	validate_walls_are_closed(game);
 }
 
+bool	launch_game(t_game *game)
+{
+	game->player.x = game->map.map_player_x * TILE_SIZE;
+	game->player.y = game->map.map_player_y * TILE_SIZE;
+	game->player.rotation_angle = 0;
+    game->player.turn_direction = 0;
+    game->player.walk_direction = 0;
+	game->player.strafe_direction = 0;
+    game->player.move_speed = 3;
+    game->player.rotation_speed = 1 * (PI / 180);
+	intialize_mlx(game);
+	return (true);
+}
+
 int	main(int ac, char **av)
 {
 	t_game	game;
@@ -364,10 +378,8 @@ int	main(int ac, char **av)
 	}
 	ft_memset(&game, 0, sizeof(t_game));
 	run_parser(av[1], &game);
-	print_parsed_data(&game);
-
-	// ASSSUEM MEHDI WILL START Hre
-	// launch_game(&game);
+	// print_parsed_data(&game);
+	launch_game(&game);
 	free_grid(game.map.grid);
 	free(game.asset_data.north_tex_path);
 	free(game.asset_data.south_tex_path);
@@ -375,46 +387,4 @@ int	main(int ac, char **av)
 	free(game.asset_data.east_tex_path);
 	return (0);
 	
-
-// 	//* mehdi Part______________________
-	
-// 	// char map[11][15] = {
-//     // {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'},
-//     // {'1','0','0','0','0','0','0','0','0','0','0','0','1','0','1'},
-//     // {'1','0','0','1','0','1','0','0','0','0','0','0','1','0','1'},
-//     // {'1','0','1','1','1','0','0','0','0','0','1','0','1','0','1'},
-//     // {'1','0','0','0','0','0','0','0','0','0','1','0','1','0','1'},
-//     // {'1','0','0','0','0','0','0','0','1','1','1','1','1','0','1'},
-//     // {'1','0','0','0','0','0','0','0','0','0','0','0','0','0','1'},
-//     // {'1','0','0','0','0','0','0','0','0','0','0','0','0','0','1'},
-//     // {'1','1','1','1','1','1','0','0','0','1','1','1','1','0','1'},
-//     // {'1','0','0','0','0','0','0','0','0','0','0','0','0','0','1'},
-//     // {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'}
-// 	// };
-
-// 	// int i = 0, j = 0;
-
-// 	// game.map.height = 11;
-// 	// game.map.width = 16;
-
-// 	// game.player.x = 1.5 * TILE_SIZE; 
-// 	// game.player.y = 1.5 * TILE_SIZE;
-
-// 	// game.map.grid = malloc(sizeof(char *) * game.map.height);
-//     // if (!game.map.grid)
-// 	// 	return (EXIT_FAILURE);
-//     // for (int i = 0; i < game.map.height; i++) 
-// 	// {
-//     //     game.map.grid[i] = malloc(sizeof(char) * game.map.width);
-//     //     if (!game.map.grid[i])
-// 	// 		return (EXIT_FAILURE);
-//     //     for (int j = 0; j < game.map.width - 1; j++){
-//     //          game.map.grid[i][j] = map[i][j];
-//     //     }
-//     //      game.map.grid[i][game.map.width - 1] = '\0'; 
-//     // }
-	
-// 	// intialize_mlx(&game);
-
-
 }
