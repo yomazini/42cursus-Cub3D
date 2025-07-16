@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 09:14:57 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/15 15:20:10 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/16 08:32:45 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ bool	find_horizontal_intersection(t_game *game, float ray_angle)
 		{
 			game->ray.horzhit_x = next_x;
 			game->ray.horzhit_y = next_y;
-			// printf("HorzhitX=%.0f\t", game->ray.horzhit_x);
-			// printf("HorzhitY=%.0f\n", game->ray.horzhit_y);
 			return (true);
 			
 		}
@@ -177,7 +175,7 @@ void draw_line(t_game *game, float x1, float y1, float x2, float y2)
     for (int i = 0; i <= steps; i++)
     {
         if (x >= 0 && x < WINDOW_WIDTH&& y >= 0 && y < WINDOW_HEIGHT)
-        	my_mlx_pixel_put(game, round(x), round(y), 0x00FF0000);
+        	my_mlx_pixel_put(game, round(x), round(y), 0x652424);
 		x += x_inc;
 		y += y_inc;
     }
@@ -216,8 +214,10 @@ void	cast_one_ray(t_game *game , float ray_angle)
 		game->ray.wall_hit_x = game->ray.horzhit_x;
 		game->ray.wall_hit_y = game->ray.horzhit_y;
 	}
-	draw_line(game, game->player.x, game->player.y,game->ray.wall_hit_x,
-	game->ray.wall_hit_y);
+	draw_line(game, game->player.x * MINIMAP_SCALE_FACTOR,
+	game->player.y * MINIMAP_SCALE_FACTOR,
+	game->ray.wall_hit_x * MINIMAP_SCALE_FACTOR,
+	game->ray.wall_hit_y * MINIMAP_SCALE_FACTOR);
 }
 
 void	cast_rays(t_game *game)

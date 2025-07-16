@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 09:31:10 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/15 15:23:22 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/16 08:19:19 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,24 @@ int	ft_exit(t_game *game)
 int	game_loop(t_game *game)
 {
 	ft_render(game);
-	
 	return (0);
 }
 int	key_press_hook(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
         ft_exit(game);
-    // W and S for forward/backward movement
     if (keycode == KEY_UP)
         game->player.walk_direction = +1;
     if (keycode == KEY_DOWN)
         game->player.walk_direction = -1;
-    // A and D for left/right strafing
     if (keycode == KEY_D)
         game->player.strafe_direction = +1;
     if (keycode == KEY_A)
         game->player.strafe_direction = -1;
-    // Arrow keys for turning
     if (keycode == KEY_RIGHT)
-        game->player.turn_direction = +1; // Right turn is positive
+        game->player.turn_direction = +1;
     if (keycode == KEY_LEFT)
-        game->player.turn_direction = -1; // Left turn is negative
+        game->player.turn_direction = -1;
     return (0);
 }
 

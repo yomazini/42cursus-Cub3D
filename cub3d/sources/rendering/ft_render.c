@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:42:51 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/15 15:36:43 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/16 08:33:58 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ void draw_square(t_game *game, int x, int y, int color)
 {
 	int i = 0;
 	int j;
+	int	minimap_tile_size;
 
-	while (i < TILE_SIZE - 1)
+	minimap_tile_size = TILE_SIZE * MINIMAP_SCALE_FACTOR;
+	while (i < minimap_tile_size - 1)
 	{
 		j = 0;
-		while (j < TILE_SIZE - 1)
+		while (j < minimap_tile_size - 1)
 		{
 			my_mlx_pixel_put(game, x + j, y + i, color);
 			j++;
@@ -40,6 +42,9 @@ void draw_square(t_game *game, int x, int y, int color)
 void	draw_map(t_game *game)
 {
 	int	x,y;
+	int minimap_x, minimap_y;
+	int color;
+	
 
 	y = 0;
 	while (y < game->map.height && game->map.grid[y])
@@ -47,12 +52,13 @@ void	draw_map(t_game *game)
 		x = 0;
 		while (x < game->map.width && game->map.grid[y][x])
 		{
-			if (game->map.grid[y][x] == '1'){
-				draw_square(game, x * TILE_SIZE, y * TILE_SIZE, 0x006272A4);
-			}
-			else{
-				draw_square(game, x * TILE_SIZE, y * TILE_SIZE, 0xFFFFFFFF);
-			}
+			if (game->map.grid[y][x] == '1')
+				color = 0x37CACEFF;
+			else
+				color = 0xFFFFFFFF;
+			minimap_x = (x * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
+			minimap_y = (y * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
+			draw_square(game, minimap_x, minimap_y, color);
 			x++;
 		}
 		y++;	
@@ -61,25 +67,35 @@ void	draw_map(t_game *game)
 
 void draw_player(t_game *game)
 {
-	int i = -1;
-	int j;
+	int y = -1;
+	int x;
+	int	player_minimap_x;
+	int	player_minimap_y;
 
-	while (i < 1)
+	player_minimap_x = game->player.x * MINIMAP_SCALE_FACTOR;
+	player_minimap_y = game->player.y * MINIMAP_SCALE_FACTOR;
+	while (y < 1)
 	{
-		j = -1;
-		while (j < 1)
+		x = -1;
+		while (x < 1)
 		{
-			my_mlx_pixel_put(game, game->player.x + j, game->player.y + i, 0x006666FF);
-			j++;
+			my_mlx_pixel_put(game, player_minimap_x + x, player_minimap_y + y, 0x006666FF);
+			x++;
 		}
-		i++;
+		y++;
 	}
+}
+
+void	ft_three_d(t_game *game)
+{
+	
 }
 
 
 void	ft_render(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->win);
+	ft_three_d(game);
 	update_player(game);
 	draw_map(game);
 	draw_player(game);
