@@ -6,11 +6,43 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:09 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/15 21:11:33 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/16 13:39:18 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+static int	count_char_in_string(const char *str, char c)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+static int	is_string_numeric(const char *str)
+{
+	int	i;
+
+	i = 0;
+	if (!str || str[0] == '\0')
+		return (0);
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 void	parse_identifiers(t_list *id_lines, t_game *data)
 {
@@ -31,53 +63,14 @@ void	parse_identifiers(t_list *id_lines, t_game *data)
 			|| !ft_strncmp(tokens[0], "EA", 3) || !ft_strncmp(tokens[0], "WE", 3))
 			parse_texture(tokens,data);
 		else if (!ft_strncmp(tokens[0], "F", 2) || !ft_strncmp(tokens[0], "C", 2))
-			printf("\n\n\n\n\n\n\nenter the parse color fun\n");
-			// parse_color(tokens,data);
+			 parse_color(tokens,data);
+			//printf("\n\n\n\n\n\n\nenter the parse color fun\n");
 		else
 			exit_with_error("Unkown identifire in the file",data);		
 		free_grid(tokens);
 		current = current->next;
 	}
 	validate_all_identifiers_found(data);
-}
-
-void	parse_color(char **tokens, t_game *data)
-{
-	char	**rgb_values;
-	t_rgb	*color_strcut;
-	int		r;
-	int		g;
-	int		b;
-	printf("\nenter the parse color fun\n");
-	rgb_values = ft_split(tokens[1], ',');
-	if (!rgb_values || count_tokens(rgb_values) != 3)
-		exit_with_error("problem in RGB file", data);
-	r = ft_atoi(rgb_values[0]);
-	g = ft_atoi(rgb_values[1]);
-	b = ft_atoi(rgb_values[2]);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		exit_with_error("RGB color value out of range 0 - 255", data);
-	if (ft_strncmp("F", tokens[0], 2) == 0)
-	{
-		if (data->checklist.f == 1)
-			exit_with_error("Duplication in the identifiesrs F C ", data);
-		data->checklist.f = 1;
-		data->asset_data.floor_rgb.red = r;
-		data->asset_data.floor_rgb.blue = b;
-		data->asset_data.floor_rgb.green = g;
-		data->asset_data.floor_rgb.is_set = 1;
-	}
-	if (ft_strncmp("C", tokens[0], 2) == 0)
-	{
-		if (data->checklist.c == 1)		
-			exit_with_error("Duplication in the identifiesrs F C ", data);
-		data->checklist.c = 1;
-		data->asset_data.ceilllig_rgb.red = r;
-		data->asset_data.ceilllig_rgb.blue = b;
-		data->asset_data.ceilllig_rgb.green = g;
-		data->asset_data.ceilllig_rgb.is_set = 1;
-	}
-	free_grid(rgb_values);
 }
 
 void	validate_all_identifiers_found(t_game *data)

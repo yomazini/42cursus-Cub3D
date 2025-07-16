@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/15 20:27:03 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/16 08:42:08 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ t_list	*read_file_to_list(char *filename)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break;
+		if (line[0] == '\n')
+			continue ;
 		new_node = ft_lstnew(ft_trim_new_line(line));
 		if (!new_node)
 		{

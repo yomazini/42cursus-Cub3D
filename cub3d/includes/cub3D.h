@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:23:10 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/15 20:19:50 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/16 13:22:24 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #define NAME "cub3D"
 #define TRUE 1
 #define FALSE 0
+#define MINIMAP_SCALE_FACTOR 0.5
 #define BUFFER_SIZE 5
 #define WALL '1'
 #define FLOOR '0'
@@ -201,6 +202,7 @@ void	validate_walls_are_closed(t_game *data);
 void	flood_fill_rec(t_game *data, char **grid_copy, int y, int x);
 int		get_max_width(char **grid);
 void	normalize_map_grid(t_game *data);
+void	parse_identifiers(t_list *id_lines, t_game *data);
 
 
 //-------- Helpers Func ----------//
