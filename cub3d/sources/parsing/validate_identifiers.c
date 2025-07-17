@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:06 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/17 18:06:13 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/17 18:06:59 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	parse_identifiers(t_list *id_lines, t_game *data)
 {
 	t_list	*current;
 	char	**tokens;
-	
+	int i = 0;
 
 	current = id_lines;
 	while (current)

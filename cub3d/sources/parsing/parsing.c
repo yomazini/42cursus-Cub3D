@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/17 15:38:12 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/17 19:58:48 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_list	*read_file_to_list(char *filename)
 	char	*line;
 	t_list	*new_node;
 	t_list	*head_list;
+	int		reach_map = FALSE;
+	char *to_test_map_reach; 
 
 	head_list = NULL;
 	fd = open(filename, O_RDONLY);
@@ -43,8 +45,12 @@ t_list	*read_file_to_list(char *filename)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break;
-		//TODO: This must be deleted as it not get new_line; because later i need to validate if the map has any newline between it;
-		if (line[0] == '\n')
+		to_test_map_reach = ft_strtrim(line, " ");
+		if (to_test_map_reach[0] == '1')
+			reach_map = TRUE;
+		// printf("==> %s || %d\n",to_test_map_reach, reach_map);
+		//TODO: This must be deleted as it not get new_line; because later i need to validate if the map has any newline between it; and protect the trimmed one;
+		if (line[0] == '\n' && reach_map == FALSE)
 			continue ;
 		new_node = ft_lstnew(ft_trim_new_line(line));
 		if (!new_node)
