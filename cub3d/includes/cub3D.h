@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:23:10 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/17 11:19:44 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/17 15:32:28 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include <fcntl.h>
-# include <unistd.h> 
+# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <math.h>
@@ -65,9 +65,8 @@ typedef struct s_assets
 	char *west_tex_path;
 	t_rgb floor_rgb;
 	t_rgb ceilllig_rgb;
-	void *wall_textures[4]; 
+	void *wall_textures[4];
 	int checker_flag; 
-	
 }t_assets;
 
 typedef struct s_list
@@ -162,7 +161,7 @@ typedef struct s_3d_data
 	float	projected_wall_height;
 	float	corrected_dist;
 	int		wall_top_pixel;
-	int		wall_bottom_pixel;	
+	int		wall_bottom_pixel;
 }	t_3d;
 
 typedef struct s_update_player
@@ -203,7 +202,7 @@ char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlen(const char *str);
+int	ft_strlen(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strtrim(char const *s1, char const *set);
@@ -219,7 +218,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s);

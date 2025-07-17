@@ -6,15 +6,15 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 12:57:33 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/08 21:16:48 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/17 15:32:16 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s[i])

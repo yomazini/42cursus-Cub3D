@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/16 16:30:12 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/17 15:38:12 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_list	*read_file_to_list(char *filename)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break;
+		//TODO: This must be deleted as it not get new_line; because later i need to validate if the map has any newline between it;
 		if (line[0] == '\n')
 			continue ;
 		new_node = ft_lstnew(ft_trim_new_line(line));
@@ -66,5 +67,5 @@ int	validate_filename(char *filename)
 	char *extention = ".cub";
 	if (str_len < 4)
 		return (0);
-	return(ft_strncmp(filename + str_len - 4,extention, 4) == 0);
+	return(ft_strncmp(filename + str_len - 4, extention, 4) == 0);
 }

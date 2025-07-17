@@ -1,10 +1,16 @@
-EA ./textures/b_1.xpm
-NO ./textures/b_3.xpm
-WE ./textures/b_2.xpm
-SO ./textures/b_4.xpm
-F 0,0,0
 
-C 0, 0,0
+ EA ./textures/wall.xpm
+ NO ./textures/wall.xpm
+
+WE ./textures/wall.xpm
+
+F 44 ,66, 8
+
+SO ./textures/wall.xpm
+
+
+
+   C 10,20,30
 
 111111111111111111
 1E0000000001000001
@@ -14,3 +20,6 @@ C 0, 0,0
 100000001001000001
 100000000000000101
 111111111111111111
+
+
+
