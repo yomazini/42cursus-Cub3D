@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:09 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/17 21:27:03 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/17 21:32:23 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,144 @@ static int	is_string_numeric(const char *str)
 //     }
 // }
 // Helper function: Check if string contains only digits (no spaces allowed)
+// static int is_string_purely_numeric(const char *str)
+// {
+//     int i;
+
+//     i = 0;
+//     if (!str || str[0] == '\0')
+//         return (0);
+//     while (str[i])
+//     {
+//         if (!ft_isdigit(str[i]))
+//             return (0);
+//         i++;
+//     }
+//     return (1);
+// }
+
+// // Helper function to reconstruct color string from tokens
+// char *reconstruct_color_string(char **tokens, int token_count)
+// {
+//     char *result;
+//     char *temp;
+//     int i;
+//     int total_len = 0;
+    
+//     // Calculate total length needed
+//     for (i = 1; i < token_count; i++)
+//         total_len += ft_strlen(tokens[i]);
+    
+//     result = malloc(total_len + 1);
+//     if (!result)
+//         return NULL;
+    
+//     result[0] = '\0';
+//     for (i = 1; i < token_count; i++)
+//     {
+//         temp = ft_strjoin(result, tokens[i]);
+//         free(result);
+//         result = temp;
+//         if (!result)
+//             return NULL;
+//     }
+//     return result;
+// }
+
+// void parse_color(char **tokens, t_game *data)
+// {
+//     char    *color_string;
+//     char    **rgb_untrimmed;
+//     char    *trimmed_val;
+//     int     rgb[3];
+//     int     i;
+//     int     token_count;
+
+//     token_count = count_tokens(tokens);
+    
+//     // Handle case where color values are split across multiple tokens due to spaces
+//     if (token_count == 2)
+//         color_string = ft_strdup(tokens[1]);
+//     else if (token_count > 2)
+//         color_string = reconstruct_color_string(tokens, token_count);
+//     else
+//         exit_with_error("Invalid color format: missing color values.", data);
+    
+//     if (!color_string)
+//         exit_with_error("Memory allocation failed.", data);
+
+//     // 1. Validate the raw string: must contain exactly two commas.
+//     if (count_char_in_string(color_string, ',') != 2)
+//     {
+//         free(color_string);
+//         exit_with_error("Invalid RGB format: must have exactly two commas.", data);
+//     }
+
+//     // 2. Split by comma.
+//     rgb_untrimmed = ft_split(color_string, ',');
+//     free(color_string);
+    
+//     if (!rgb_untrimmed || count_tokens(rgb_untrimmed) != 3)
+//     {
+//         free_grid(rgb_untrimmed);
+//         exit_with_error("Invalid RGB format: must have three values.", data);
+//     }
+        
+//     i = 0;
+//     while (i < 3)
+//     {
+//         // 3. Trim each part to handle spaces/tabs.
+//         trimmed_val = ft_strtrim(rgb_untrimmed[i], " \t");
+//         if (!trimmed_val)
+//         {
+//             free_grid(rgb_untrimmed);
+//             exit_with_error("Memory allocation failed.", data);
+//         }
+        
+//         // 4. Check if the trimmed value is purely numeric (no spaces allowed)
+//         if (!is_string_purely_numeric(trimmed_val))
+//         {
+//             free(trimmed_val);
+//             free_grid(rgb_untrimmed);
+//             exit_with_error("RGB values must be numeric.", data);
+//         }
+        
+//         // 5. Convert and validate the range.
+//         rgb[i] = ft_atoi(trimmed_val);
+//         if (rgb[i] < 0 || rgb[i] > 255)
+//         {
+//             free(trimmed_val);
+//             free_grid(rgb_untrimmed);
+//             exit_with_error("RGB color value out of range (0-255).", data);
+//         }
+        
+//         free(trimmed_val);
+//         i++;
+//     }
+//     free_grid(rgb_untrimmed);
+
+//     // 6. Assign the validated colors.
+//     if (ft_strncmp("F", tokens[0], 2) == 0)
+//     {
+//         if (data->checklist.f == 1) 
+//             exit_with_error("Duplicate F identifier.", data);
+//         data->checklist.f = 1;
+//         data->asset_data.floor_rgb = (t_rgb){rgb[0], rgb[1], rgb[2], 1};
+//     }
+//     else if (ft_strncmp("C", tokens[0], 2) == 0)
+//     {
+//         if (data->checklist.c == 1) 
+//             exit_with_error("Duplicate C identifier.", data);
+//         data->checklist.c = 1;
+//         data->asset_data.ceilllig_rgb = (t_rgb){rgb[0], rgb[1], rgb[2], 1};
+//     }
+// }
+
+
+
+//---------
+
+// Helper function: Check if string contains only digits
 static int is_string_purely_numeric(const char *str)
 {
     int i;
@@ -248,7 +386,7 @@ static int is_string_purely_numeric(const char *str)
     return (1);
 }
 
-// Helper function to reconstruct color string from tokens
+// Helper function to reconstruct color string from tokens (starting from index 1)
 char *reconstruct_color_string(char **tokens, int token_count)
 {
     char *result;
@@ -256,9 +394,9 @@ char *reconstruct_color_string(char **tokens, int token_count)
     int i;
     int total_len = 0;
     
-    // Calculate total length needed
+    // Calculate total length needed (including spaces between tokens)
     for (i = 1; i < token_count; i++)
-        total_len += ft_strlen(tokens[i]);
+        total_len += ft_strlen(tokens[i]) + 1; // +1 for space
     
     result = malloc(total_len + 1);
     if (!result)
@@ -267,6 +405,14 @@ char *reconstruct_color_string(char **tokens, int token_count)
     result[0] = '\0';
     for (i = 1; i < token_count; i++)
     {
+        if (i > 1)
+        {
+            temp = ft_strjoin(result, " ");
+            free(result);
+            result = temp;
+            if (!result)
+                return NULL;
+        }
         temp = ft_strjoin(result, tokens[i]);
         free(result);
         result = temp;
@@ -365,6 +511,59 @@ void parse_color(char **tokens, t_game *data)
     }
 }
 
+// IMPORTANT: Also fix the parse_identifiers function
+void parse_identifiers(t_list *id_lines, t_game *data)
+{
+    t_list  *current;
+    char    **tokens;
+
+    current = id_lines;
+    while (current)
+    {
+        tokens = ft_split((char *)current->content, ' ');
+        if (!tokens)
+            exit_with_error("malloc failed here", data);
+        
+        // REMOVE THIS CHECK - it's causing the silent failure
+        // if (count_tokens(tokens) != 2)
+        //     return ;
+        
+        // Instead, check if we have at least 2 tokens
+        if (count_tokens(tokens) < 2)
+        {
+            free_grid(tokens);
+            exit_with_error("Invalid identifier format", data);
+        }
+        
+        if (!ft_strncmp(tokens[0], "NO", 3) || !ft_strncmp(tokens[0], "SO", 3)
+            || !ft_strncmp(tokens[0], "EA", 3) || !ft_strncmp(tokens[0], "WE", 3))
+        {
+            // For textures, we still need exactly 2 tokens
+            if (count_tokens(tokens) != 2)
+            {
+                free_grid(tokens);
+                exit_with_error("Invalid texture format", data);
+            }
+            parse_texture(tokens, data);
+        }
+        else if (!ft_strncmp(tokens[0], "F", 2) || !ft_strncmp(tokens[0], "C", 2))
+        {
+            // For colors, we can have multiple tokens due to spaces
+            parse_color(tokens, data);
+        }
+        else
+        {
+            free_grid(tokens);
+            exit_with_error("Unknown identifier in the file", data);
+        }
+        
+        free_grid(tokens);
+        current = current->next;
+    }
+    validate_all_identifiers_found(data);
+}
+
+//----------
 
 
 

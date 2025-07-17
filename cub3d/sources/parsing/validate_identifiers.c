@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:06 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/17 18:06:59 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/17 21:33:15 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,35 @@ static int	is_string_numeric(const char *str)
 	return (1);
 }
 
-void	parse_identifiers(t_list *id_lines, t_game *data)
-{
-	t_list	*current;
-	char	**tokens;
-	int i = 0;
+// void	parse_identifiers(t_list *id_lines, t_game *data)
+// {
+// 	t_list	*current;
+// 	char	**tokens;
+// 	int i = 0;
 
-	current = id_lines;
-	while (current)
-	{
-		tokens = ft_split((char *)current->content ,' ');
-		if (!tokens)
-			exit_with_error("malloc failed here", data);
-		if (count_tokens(tokens) != 2)
-			return ;
-//			exit(1);
-//			exit_with_error("error in the number of tokens ", data);
-		if (!ft_strncmp(tokens[0], "NO", 3) || !ft_strncmp(tokens[0], "SO", 3)
-			|| !ft_strncmp(tokens[0], "EA", 3) || !ft_strncmp(tokens[0], "WE", 3))
-			parse_texture(tokens, data);
-		else if (!ft_strncmp(tokens[0], "F", 2) || !ft_strncmp(tokens[0], "C", 2))
-			 parse_color(tokens, data);
-			//printf("\n\n\n\n\n\n\nenter the parse color fun\n");
-		else
-			exit_with_error("Unkown identifire in the file",data);		
-		free_grid(tokens);
-		current = current->next;
-	}
-	validate_all_identifiers_found(data);
-}
+// 	current = id_lines;
+// 	while (current)
+// 	{
+// 		tokens = ft_split((char *)current->content ,' ');
+// 		if (!tokens)
+// 			exit_with_error("malloc failed here", data);
+// 		if (count_tokens(tokens) != 2)
+// 			return ;
+// //			exit(1);
+// //			exit_with_error("error in the number of tokens ", data);
+// 		if (!ft_strncmp(tokens[0], "NO", 3) || !ft_strncmp(tokens[0], "SO", 3)
+// 			|| !ft_strncmp(tokens[0], "EA", 3) || !ft_strncmp(tokens[0], "WE", 3))
+// 			parse_texture(tokens, data);
+// 		else if (!ft_strncmp(tokens[0], "F", 2) || !ft_strncmp(tokens[0], "C", 2))
+// 			 parse_color(tokens, data);
+// 			//printf("\n\n\n\n\n\n\nenter the parse color fun\n");
+// 		else
+// 			exit_with_error("Unkown identifire in the file",data);		
+// 		free_grid(tokens);
+// 		current = current->next;
+// 	}
+// 	validate_all_identifiers_found(data);
+// }
 
 void	parse_texture(char **tokens, t_game *data)
 {

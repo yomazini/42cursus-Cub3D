@@ -7,11 +7,11 @@
 
   F 77, 88,99 
 
-   SO ./textures/wall.xpm
+   SO     ./textures/wall.xpm
 
 
 
-       C 10,20,30 
+       C 10,   20,     30 
 
 111111111111111111
 1E0000000001000001
