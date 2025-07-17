@@ -5,12 +5,12 @@
 
      WE ./textures/wall.xpm
 
+  F 77, 88,99 
 
    SO ./textures/wall.xpm
 
 
 
-  F 77,88,99 
        C 10,20,30 
 
 111111111111111111
