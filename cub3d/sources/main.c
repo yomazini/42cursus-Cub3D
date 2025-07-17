@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/17 17:08:11 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/17 17:59:02 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	main(int ac, char **av)
 	run_parser(av[1], &game);
 	print_parsed_data(&game);
 	sleep(1);
-	// launch_game(&game);
+	launch_game(&game);
 	free_grid(game.map.grid);
 	free(game.asset_data.north_tex_path);
 	free(game.asset_data.south_tex_path);

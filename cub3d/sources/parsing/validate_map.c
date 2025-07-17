@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:09 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/17 16:17:51 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/17 18:04:30 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,12 @@ void    validate_walls_are_closed(t_game *data)
 {
 	char	**map_copy;
 
+	if (data->map.height > 200 && data->map.height > 200)
+	{
+		//TODO: later free_leaks do not forget that;
+		exit_with_error("the map too big; will get stackoverflow.com",data);
+	}
+		// printf("%d\n%d",data->map.height, data->map.width);
 	map_copy = duplicate_grid(data->map.grid, data->map.height);
 	if (!map_copy)
 		exit_with_error("Malloc failed for map copy.", data);
