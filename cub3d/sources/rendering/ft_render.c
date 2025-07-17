@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:42:51 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/17 13:07:51 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/17 13:52:47 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,15 @@ void	draw_map(t_game *game)
 		while (x < game->map.width && game->map.grid[y][x])
 		{
 			if (game->map.grid[y][x] == '1')
-			{
 				color = 0x37CACEFF;
-				minimap_x = (x * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
-				minimap_y = (y * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
-				draw_square(game, minimap_x, minimap_y, color);
-			}
 			else if (game->map.grid[y][x] == '0')
-			{
 				color = 0xFFFFFFFF;
-				minimap_x = (x * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
-				minimap_y = (y * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
-				draw_square(game, minimap_x, minimap_y, color);
-			}
+			else if (game->map.grid[y][x] == ' ')
+				color = 0x710000;
+			minimap_x = (x * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
+			minimap_y = (y * TILE_SIZE) * MINIMAP_SCALE_FACTOR;
+			draw_square(game, minimap_x, minimap_y, color);
+
 			x++;
 		}
 		y++;	
