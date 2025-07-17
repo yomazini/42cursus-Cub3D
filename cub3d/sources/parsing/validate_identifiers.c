@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:06 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/16 11:00:33 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/16 16:28:16 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,12 @@ void	separate_file_content(t_list *all_lines,
 		if (map_has_started == FALSE && is_map_line(line_content))
 			map_has_started = 1;
 		if (map_has_started)
+		{
+			if (line_content[0] == '\n')
+				exit_with_error("the map has newline between it",NULL);
 			ft_lstadd_back(map_lines, ft_lstnew(ft_strdup(line_content)));
+		}
+			
 		else
 			ft_lstadd_back(id_lines, ft_lstnew(ft_strdup(line_content)));
 		current_node = current_node->next;

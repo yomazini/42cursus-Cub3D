@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/17 13:11:01 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/17 13:19:14 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -392,8 +392,8 @@ int	main(int ac, char **av)
 	}
 	ft_memset(&game, 0, sizeof(t_game));
 	run_parser(av[1], &game);
-	// print_parsed_data(&game);
-	printf("%d\n", game.map.width);
+	print_parsed_data(&game);
+	sleep(1);
 	launch_game(&game);
 	free_grid(game.map.grid);
 	free(game.asset_data.north_tex_path);
