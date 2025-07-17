@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:23:10 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/16 14:44:14 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/17 11:19:44 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,47 @@ typedef struct s_player
 }	t_player;
 
 
+typedef struct	s_dda
+{
+	float	y_intercept;
+	float	x_intercept;
+	float	x_step;
+	float	y_step;
+	float	next_x;
+	float	next_y;
+}	t_dda;
+
+typedef struct s_line
+{
+	float	dx;
+	float	dy;
+	int		steps;
+	float	x_inc;
+	float	y_inc;
+	float	x;
+	float	y;
+}	t_line;
+
+typedef struct s_3d_data
+{
+	float	dist_to_proj_plane;
+	float	projected_wall_height;
+	float	corrected_dist;
+	int		wall_top_pixel;
+	int		wall_bottom_pixel;	
+}	t_3d;
+
+typedef struct s_update_player
+{
+	float	move_step;
+	float	move_x;
+	float	move_y;
+	float	new_x;
+	float	new_y;
+	float   strafe_angle;
+	float   strafe_step;
+}	t_p;
+
 typedef struct s_game
 {
 	void *mlx;
@@ -221,5 +262,12 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 bool	hit_wall(t_game *game, float x, float y);
 void	update_player(t_game *game);
 void 	draw_line(t_game *game, float x1, float y1, float x2, float y2);
+float 	distance(float x1, float y1, float x2, float y2);
+void	draw_line(t_game *game, float x1, float y1, float x2, float y2);
+void	initiatize_rayfacing(t_game *game, float ray_angle, int i);
+void	cast_one_ray(t_game *game , int i);
+void	store_final_hit(t_game *game, float h_dist, float v_dist, int i);
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+void	render_3d_projaction(t_game *game);
 
 #endif

@@ -18,6 +18,10 @@ SRCS		=	main.c \
 				rendering/normalize_angle.c \
 				rendering/cast_rays.c \
 				rendering/update_player.c \
+				rendering/raycastion_tools.c \
+				rendering/cast_one_ray.c \
+				rendering/my_mlx_pixel_put.c \
+				rendering/draw_3D.c \
 				tools/ft_atoi.c \
 				tools/ft_isalnum.c \
 				tools/ft_isalpha.c \
