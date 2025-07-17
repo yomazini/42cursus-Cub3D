@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/17 13:19:14 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/17 14:47:29 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -385,6 +385,8 @@ int	main(int ac, char **av)
 {
 	t_game	game;
 
+	// if (WINDOW_HEIGHT != 720 || WINDOW_WIDTH != 1280)
+	// 	return (1);
 	if (ac != 2)
 	{
 		ft_putstr_fd("Usage: ./cub3D <path_to_map.cub>\n", 2);
