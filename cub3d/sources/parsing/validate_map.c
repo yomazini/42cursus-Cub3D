@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:09 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/18 18:06:42 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/18 18:10:15 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	*get_color_string(char **tokens, int token_count, t_game *data)
 	if (count_char_in_string(color_string, ',') != 2)
 	{
 		free(color_string);
-		exit_with_error("Invalid RGB format: must have exactly two commas.", data);
+		exit_with_error("Invalid RGB format:two commas.", data);
 	}
 	return (color_string);
 }
@@ -43,7 +43,7 @@ static void	validate_rgb_value(char *val, t_rgb_validator *validator)
 	if (validator->rgb[validator->i] < 0 || validator->rgb[validator->i] > 255)
 	{
 		(free(val), free_grid(validator->rgb_untrimmed));
-		exit_with_error("RGB color value out of range (0-255).", validator->data);
+		exit_with_error("RGB out of range (0-255).", validator->data);
 	}
 }
 
