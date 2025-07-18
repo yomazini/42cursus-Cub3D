@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/17 19:58:48 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/18 12:05:49 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ t_list	*read_file_to_list(char *filename)
 		//TODO: This must be deleted as it not get new_line; because later i need to validate if the map has any newline between it; and protect the trimmed one;
 		if (line[0] == '\n' && reach_map == FALSE)
 			continue ;
+		if (line[0] == '\n' && reach_map == TRUE)
+			{
+				exit_with_error("Ops Trickkkky NL",NULL);
+				exit(1);
+			}
 		new_node = ft_lstnew(ft_trim_new_line(line));
 		if (!new_node)
 		{
