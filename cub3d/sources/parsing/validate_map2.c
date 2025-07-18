@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:40:57 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/18 17:29:08 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/18 19:53:12 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ void	flood_fill_rec(t_game *data, char **grid_copy, int y, int x)
 		free_grid(grid_copy);
 		exit_with_error("Map has a hole; floor is adjacent to a space.", data);
 	}
-	if (grid_copy[y][x] == '1' || grid_copy[y][x] == 'F')
+	if (grid_copy[y][x] == '1' || grid_copy[y][x] == 'V')
 		return ;
-	grid_copy[y][x] = 'F';
+	grid_copy[y][x] = 'V';
 	flood_fill_rec(data, grid_copy, y - 1, x);
-	flood_fill_rec(data, grid_copy, y + 1, x);
 	flood_fill_rec(data, grid_copy, y, x + 1);
+	flood_fill_rec(data, grid_copy, y + 1, x);
 	flood_fill_rec(data, grid_copy, y, x - 1);
 }
