@@ -14,6 +14,7 @@ SRCS		=	main.c \
 				parsing/parsing_tools.c \
 				parsing/map_creation.c \
 				parsing/validate_identifiers.c \
+				parsing/parsing_colors_helpers.c \
 				parsing/validate_map.c \
 				parsing/validate_map2.c \
 				rendering/ft_render.c \

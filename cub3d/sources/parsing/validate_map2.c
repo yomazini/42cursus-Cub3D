@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:40:57 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/18 17:09:08 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/18 17:29:08 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,25 @@ void	parse_identifiers(t_list *id_lines, t_game *data)
 		current = current->next;
 	}
 	validate_all_identifiers_found(data);
+}
+
+void	flood_fill_rec(t_game *data, char **grid_copy, int y, int x)
+{
+	if (y < 0 || y >= data->map.height || x < 0 || x >= data->map.width)
+	{
+		free_grid(grid_copy);
+		exit_with_error("Map is not closed at the edges.", data);
+	}
+	if (grid_copy[y][x] == ' ')
+	{
+		free_grid(grid_copy);
+		exit_with_error("Map has a hole; floor is adjacent to a space.", data);
+	}
+	if (grid_copy[y][x] == '1' || grid_copy[y][x] == 'F')
+		return ;
+	grid_copy[y][x] = 'F';
+	flood_fill_rec(data, grid_copy, y - 1, x);
+	flood_fill_rec(data, grid_copy, y + 1, x);
+	flood_fill_rec(data, grid_copy, y, x + 1);
+	flood_fill_rec(data, grid_copy, y, x - 1);
 }

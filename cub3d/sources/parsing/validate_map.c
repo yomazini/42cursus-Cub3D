@@ -6,133 +6,106 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:09 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/18 17:09:13 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/18 18:06:42 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-char	*reconstruct_color_string(char **tokens, int token_count)
+static char	*get_color_string(char **tokens, int token_count, t_game *data)
 {
-	char	*result;
-	char	*temp;
-	int		i;
-	int		total_len;
+	char	*color_string;
 
-	total_len = 0;
-	i = 0;
-	while (++i < token_count)
-		total_len += ft_strlen(tokens[i]) + 1;
-	result = malloc(total_len + 1);
-	if (!result)
-		return (NULL);
-	result[0] = '\0';
-	i = 0;
-	while (++i < token_count)
-	{
-		if (i > 1)
-		{
-			temp = ft_strjoin(result, " ");
-			free(result);
-			result = temp;
-			if (!result)
-				return (NULL);
-		}
-		temp = ft_strjoin(result, tokens[i]);
-		free(result);
-		result = temp;
-		if (!result)
-			return (NULL);
-	}
-	return (result);
-}
-
-void	parse_color(char **tokens, t_game *data)
-{
-    char	*color_string;
-    char	**rgb_untrimmed;
-    char	*trimmed_val;
-    int		rgb[3];
-    int		i;
-    int		token_count;
-
-	token_count = count_tokens(tokens);
 	if (token_count == 2)
-	    color_string = ft_strdup(tokens[1]);
+		color_string = ft_strdup(tokens[1]);
 	else if (token_count > 2)
-	    color_string = reconstruct_color_string(tokens, token_count);
+		color_string = reconstruct_color_string(tokens, token_count);
 	else
-	    exit_with_error("Invalid color format: missing color values.", data);
+		exit_with_error("Invalid color format: missing color values.", data);
 	if (!color_string)
-	    exit_with_error("Memory allocation failed.", data);
+		exit_with_error("Memory allocation failed.", data);
 	if (count_char_in_string(color_string, ',') != 2)
 	{
-	    free(color_string);
-	    exit_with_error("Invalid RGB format: must have exactly two commas.", data);
+		free(color_string);
+		exit_with_error("Invalid RGB format: must have exactly two commas.", data);
 	}
-	rgb_untrimmed = ft_split(color_string, ',');
-	free(color_string);
-	if (!rgb_untrimmed || count_tokens(rgb_untrimmed) != 3)
+	return (color_string);
+}
+
+static void	validate_rgb_value(char *val, t_rgb_validator *validator)
+{
+	if (!is_string_purely_numeric(val))
 	{
-	    free_grid(rgb_untrimmed);
-	    exit_with_error("Invalid RGB format: must have three values.", data);
+		(free(val), free_grid(validator->rgb_untrimmed));
+		exit_with_error("RGB values must be numeric.", validator->data);
 	}
+	validator->rgb[validator->i] = ft_atoi(val);
+	if (validator->rgb[validator->i] < 0 || validator->rgb[validator->i] > 255)
+	{
+		(free(val), free_grid(validator->rgb_untrimmed));
+		exit_with_error("RGB color value out of range (0-255).", validator->data);
+	}
+}
+
+static void	parse_rgb_values(char **rgb_untrimmed, int *rgb, t_game *data)
+{
+	char			*trimmed_val;
+	t_rgb_validator	validator;
+	int				i;
+
+	validator.rgb_untrimmed = rgb_untrimmed;
+	validator.rgb = rgb;
+	validator.data = data;
 	i = -1;
 	while (++i < 3)
 	{
-	    trimmed_val = ft_strtrim(rgb_untrimmed[i], " \t");
-	    if (!trimmed_val)
-	    {
-	        free_grid(rgb_untrimmed);
-	        exit_with_error("Memory allocation failed.", data);
-	    }
-	    if (!is_string_purely_numeric(trimmed_val))
-	    {
-	        (free(trimmed_val), free_grid(rgb_untrimmed));
-	        exit_with_error("RGB values must be numeric.", data);
-	    }
-	    rgb[i] = ft_atoi(trimmed_val);
-	    if (rgb[i] < 0 || rgb[i] > 255)
-	    {
-	        (free(trimmed_val), free_grid(rgb_untrimmed));
-	        exit_with_error("RGB color value out of range (0-255).", data);
-	    }
-	    free(trimmed_val);
+		validator.i = i;
+		trimmed_val = ft_strtrim(rgb_untrimmed[i], " \t");
+		if (!trimmed_val)
+		{
+			free_grid(rgb_untrimmed);
+			exit_with_error("Memory allocation failed.", data);
+		}
+		validate_rgb_value(trimmed_val, &validator);
+		free(trimmed_val);
 	}
-	free_grid(rgb_untrimmed);
+}
+
+static void	assign_color_to_data(char **tokens, int *rgb, t_game *data)
+{
 	if (ft_strncmp("F", tokens[0], 2) == 0)
 	{
-	    if (data->checklist.f == 1) 
-	        exit_with_error("Duplicate F identifier.", data);
-	    data->checklist.f = 1;
-	    data->asset_data.floor_rgb = (t_rgb){rgb[0], rgb[1], rgb[2], 1};
+		if (data->checklist.f == 1)
+			exit_with_error("Duplicate F identifier.", data);
+		data->checklist.f = 1;
+		data->asset_data.floor_rgb = (t_rgb){rgb[0], rgb[1], rgb[2], 1};
 	}
 	else if (ft_strncmp("C", tokens[0], 2) == 0)
 	{
-		if (data->checklist.c == 1) 
-		    exit_with_error("Duplicate C identifier.", data);
+		if (data->checklist.c == 1)
+			exit_with_error("Duplicate C identifier.", data);
 		data->checklist.c = 1;
 		data->asset_data.ceilllig_rgb = (t_rgb){rgb[0], rgb[1], rgb[2], 1};
 	}
 }
 
-void	flood_fill_rec(t_game *data, char **grid_copy, int y, int x)
+void	parse_color(char **tokens, t_game *data)
 {
-	if (y < 0 || y >= data->map.height || x < 0 || x >= data->map.width)
+	char	*color_string;
+	char	**rgb_untrimmed;
+	int		rgb[3];
+	int		token_count;
+
+	token_count = count_tokens(tokens);
+	color_string = get_color_string(tokens, token_count, data);
+	rgb_untrimmed = ft_split(color_string, ',');
+	free(color_string);
+	if (!rgb_untrimmed || count_tokens(rgb_untrimmed) != 3)
 	{
-		free_grid(grid_copy);
-		exit_with_error("Map is not closed at the edges.", data);
+		free_grid(rgb_untrimmed);
+		exit_with_error("Invalid RGB format: must have three values.", data);
 	}
-	if (grid_copy[y][x] == ' ')
-	{
-		free_grid(grid_copy);
-		exit_with_error("Map has a hole; floor is adjacent to a space.", data);
-	}
-	if (grid_copy[y][x] == '1' || grid_copy[y][x] == 'F')
-		return ;
-	grid_copy[y][x] = 'F';
-	flood_fill_rec(data, grid_copy, y - 1, x);
-	flood_fill_rec(data, grid_copy, y + 1, x);
-	flood_fill_rec(data, grid_copy, y, x + 1);
-	flood_fill_rec(data, grid_copy, y, x - 1);
+	parse_rgb_values(rgb_untrimmed, rgb, data);
+	free_grid(rgb_untrimmed);
+	assign_color_to_data(tokens, rgb, data);
 }

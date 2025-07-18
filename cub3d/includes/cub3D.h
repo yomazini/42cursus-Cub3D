@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/18 15:58:53 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/18 18:08:38 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,14 @@ typedef struct s_game
 	t_id_checker	checklist;
 }				t_game;
 
+typedef struct s_rgb_validator
+{
+	char	**rgb_untrimmed;
+	int		*rgb;
+	int		i;
+	t_game	*data;
+}	t_rgb_validator;
+
 // LIB
 int		ft_atoi(const char *str);
 int		ft_isalnum(int c);
@@ -235,6 +243,7 @@ char	**duplicate_grid(char **grid, int height);
 int		is_string_purely_numeric(const char *str);
 int		is_string_numeric(const char *str);
 int		count_char_in_string(const char *str, char c);
+char	*reconstruct_color_string(char **tokens, int token_count);
 
 // Helpers Func
 void	exit_with_error(char *message, t_game *game);
