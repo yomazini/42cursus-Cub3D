@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/18 11:17:03 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/18 15:24:09 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	run_parser(char *filename, t_game *game)
 
 float	rotation_angle(t_game *game)
 {
-	if(game->map.spawn_side_face == 'E')
+	if (game->map.spawn_side_face == 'E')
 		return (0);
 	else if (game->map.spawn_side_face == 'N')
 		return (1.5 * PI);
@@ -82,11 +82,11 @@ bool	launch_game(t_game *game)
 	game->player.x = game->map.map_player_x * TILE_SIZE;
 	game->player.y = game->map.map_player_y * TILE_SIZE;
 	game->player.rotation_angle = rotation_angle(game);
-    game->player.turn_direction = 0;
-    game->player.walk_direction = 0;
+	game->player.turn_direction = 0;
+	game->player.walk_direction = 0;
 	game->player.strafe_direction = 0;
-    game->player.move_speed = 3;
-    game->player.rotation_speed = 1 * (PI / 180);
+	game->player.move_speed = 3;
+	game->player.rotation_speed = 1 * (PI / 180);
 	intialize_mlx(game);
 	return (true);
 }
@@ -113,5 +113,4 @@ int	main(int ac, char **av)
 	free(game.asset_data.west_tex_path);
 	free(game.asset_data.east_tex_path);
 	return (0);
-	
 }

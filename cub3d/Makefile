@@ -11,8 +11,11 @@ MLX_DIR		=	minilibx_opengl
 SRCS		=	main.c \
 				parsing/parsing.c \
 				parsing/read_file.c \
+				parsing/parsing_tools.c \
+				parsing/map_creation.c \
 				parsing/validate_identifiers.c \
 				parsing/validate_map.c \
+				parsing/validate_map2.c \
 				rendering/ft_render.c \
 				rendering/intialize_mlx.c \
 				rendering/normalize_angle.c \
