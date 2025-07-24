@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/24 17:22:30 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/24 17:55:06 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,15 @@ static int	handle_line(char *line, int *reach_map, t_list **head_list)
 	if (line[0] == '\n' && *reach_map == FALSE)
 		return (free(to_test_map_reach), 0);
 	if (line[0] == '\n' && *reach_map == TRUE)
+	{
+		free(to_test_map_reach);
 		exit_with_error("Ops Trickkkky NL", NULL);
+	}
 	new_node = ft_lstnew(ft_trim_new_line(line));
 	if (!new_node)
 	{
-		free(line);
+		(free(line), free(to_test_map_reach));
 		ft_lstclear(head_list, free);
-		free(to_test_map_reach);
-		ft_putstr_fd("malloc failed in file reading", 2);
 		exit(1);
 	}
 	ft_lstadd_back(head_list, new_node);

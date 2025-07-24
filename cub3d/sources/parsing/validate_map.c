@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:09 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/24 17:34:35 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/24 18:00:59 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,19 @@ static char	*get_color_string(char **tokens, int token_count, t_game *data)
 	char	*color_string;
 
 	if (token_count == 2)
+	{
 		color_string = ft_strdup(tokens[1]);
-	if (!color_string)
-		exit_with_error("strdup failed", data);
+		if (!color_string)
+			exit_with_error("strdup failed", data);
+	}
 	else if (token_count > 2)
+	{
 		color_string = reconstruct_color_string(tokens, token_count);
+		if (!color_string)
+			exit_with_error("Memory allocation failed.", data);
+	}
 	else
-		exit_with_error("Invalid color format: missing color values.", data);
+		exit_with_error("Invalidcolformat: missing col", data);
 	if (!color_string)
 		exit_with_error("Memory allocation failed.", data);
 	if (count_char_in_string(color_string, ',') != 2)

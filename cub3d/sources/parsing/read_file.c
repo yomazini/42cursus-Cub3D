@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:03 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/18 17:09:24 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/24 17:59:52 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ static int	is_line_empty(char *line)
 		return (TRUE);
 	return (FALSE);
 }
+
+//static int is_map_line(char *line)
+//{
+//    int i = 0;
+//    while (line[i] == ' ' || line[i] == '\t')
+//        i++;
+//    return (ft_strchr("01NSWE", line[i]) != NULL);
+//}
 
 static int	is_map_line(char *line)
 {
