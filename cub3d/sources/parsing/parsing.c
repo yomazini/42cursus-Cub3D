@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/18 17:09:22 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/24 17:22:30 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static int	handle_line(char *line, int *reach_map, t_list **head_list)
 	char	*to_test_map_reach;
 
 	to_test_map_reach = ft_strtrim(line, " ");
+	if (!to_test_map_reach)
+		exit_with_error("alloc failed in trim", NULL);
 	if (to_test_map_reach[0] == '1')
 		*reach_map = TRUE;
 	if (line[0] == '\n' && *reach_map == FALSE)
@@ -53,6 +55,7 @@ static int	handle_line(char *line, int *reach_map, t_list **head_list)
 	{
 		free(line);
 		ft_lstclear(head_list, free);
+		free(to_test_map_reach);
 		ft_putstr_fd("malloc failed in file reading", 2);
 		exit(1);
 	}

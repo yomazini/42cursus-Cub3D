@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:40:57 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/18 19:53:12 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/24 17:38:25 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	validate_walls_are_closed(t_game *data)
 {
 	char	**map_copy;
 
-	if (data->map.height > 200 && data->map.height > 200)
+	if (data->map.height > 200 || data->map.height > 200)
 	{
 		exit_with_error("the map too big", data);
 	}
