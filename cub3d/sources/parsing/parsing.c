@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/25 11:29:05 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/25 11:44:32 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int	handle_line(char *line, int *reach_map, t_list **head_list)
 	if (line[0] == '\n' && *reach_map == TRUE)
 	{
 		free(to_test_map_reach);
-		to_test_map_reach = NULL;
 		exit_with_error("Ops Trickkkky NL", NULL);
 	}
 	new_node = ft_lstnew(ft_trim_new_line(line));

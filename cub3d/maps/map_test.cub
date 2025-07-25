@@ -10,6 +10,7 @@ C       102,  20, 3
   SO      ./textures/south_texture.xpm
   EA   ./textures/east_texture.xpm
 
+1
 
   WE ./textures/wall.xpm
 
