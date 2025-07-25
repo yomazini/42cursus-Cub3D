@@ -10,7 +10,6 @@ C       102,  20, 3
   SO      ./textures/south_texture.xpm
   EA   ./textures/east_texture.xpm
 
-1
 
   WE ./textures/wall.xpm
 
@@ -18,8 +17,8 @@ C       102,  20, 3
 
 1111111
 1000001
-10000001
-101N101
+1000001
+101N101   
 1011101
 1000001
 1111111
