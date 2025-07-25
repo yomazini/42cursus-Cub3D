@@ -28,6 +28,7 @@ SRCS		=	main.c \
 				rendering/my_mlx_pixel_put_minimap.c \
 				rendering/draw_3D.c \
 				rendering/render_minimap.c \
+				rendering/load_textures.c \
 				tools/ft_atoi.c \
 				tools/ft_isalnum.c \
 				tools/ft_isalpha.c \

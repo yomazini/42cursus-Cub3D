@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/25 13:06:21 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/25 13:25:32 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,30 +63,9 @@ void	run_parser(char *filename, t_game *game)
 	validate_walls_are_closed(game);
 }
 
-float	rotation_angle(t_game *game)
-{
-	if (game->map.spawn_side_face == 'E')
-		return (0);
-	else if (game->map.spawn_side_face == 'N')
-		return (1.5 * PI);
-	else if (game->map.spawn_side_face == 'W')
-		return (PI);
-	else if (game->map.spawn_side_face == 'S')
-		return (PI / 2);
-	else
-		return (-1);
-}
 
 bool	launch_game(t_game *game)
 {
-	game->player.x = game->map.map_player_x * TILE_SIZE;
-	game->player.y = game->map.map_player_y * TILE_SIZE;
-	game->player.rotation_angle = rotation_angle(game);
-	game->player.turn_direction = 0;
-	game->player.walk_direction = 0;
-	game->player.strafe_direction = 0;
-	game->player.move_speed = 10;
-	game->player.rotation_speed = 1 * (PI / 180);
 	intialize_mlx(game);
 	return (true);
 }
