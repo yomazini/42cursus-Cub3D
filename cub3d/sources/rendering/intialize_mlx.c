@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 09:31:10 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/16 08:19:19 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/25 13:51:16 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,30 @@ int key_release_hook(int keycode, t_game *game)
     return (0);
 }
 
+static float	rotation_angle(t_game *game)
+{
+	if (game->map.spawn_side_face == 'E')
+		return (0);
+	else if (game->map.spawn_side_face == 'N')
+		return (1.5 * PI);
+	else if (game->map.spawn_side_face == 'W')
+		return (PI);
+	else if (game->map.spawn_side_face == 'S')
+		return (PI / 2);
+	else
+		return (-1);
+}
+
 bool	intialize_mlx(t_game *game)
 {
+	game->player.x = game->map.map_player_x * TILE_SIZE;
+	game->player.y = game->map.map_player_y * TILE_SIZE;
+	game->player.rotation_angle = rotation_angle(game);
+	game->player.turn_direction = 0;
+	game->player.walk_direction = 0;
+	game->player.strafe_direction = 0;
+	game->player.move_speed = 4;
+	game->player.rotation_speed = 1 * (PI / 180);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (false);
@@ -64,6 +86,7 @@ bool	intialize_mlx(t_game *game)
 	game->win = mlx_new_window(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	if (!game->win)
 		return (false);
+	load_textures(game);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_hook(game->win, 17, 0, ft_exit, game);
 	 mlx_hook(game->win, 2, 1L<<0, key_press_hook, game);

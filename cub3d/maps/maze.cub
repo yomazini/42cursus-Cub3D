@@ -1,17 +1,17 @@
 
- EA ./textures/wall.xpm
- NO ./textures/wall.xpm
+ EA ./textures/east_texture.xpm
+ NO ./textures/east_texture.xpm
 
-WE ./textures/wall.xpm
+WE ./textures/east_texture.xpm
 
 
-SO ./textures/wall.xpm
+SO ./textures/east_texture.xpm
 
 
 
 C 225,30,0
 
-F 220,100,0 followed by many spaces and special characters
+F 220,100,0
 
 01111111
 10000001

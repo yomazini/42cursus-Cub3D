@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/25 14:59:01 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/25 15:01:36 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,29 @@ typedef struct s_rgb
 	int	is_set;
 }				t_rgb;
 
+typedef struct s_texture
+{
+	void	*img_ptr;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_len;
+	int		endian;
+}	t_texture;
+
+
 typedef struct s_assets
 {
-	char	*north_tex_path;
-	char	*east_tex_path;
-	char	*south_tex_path;
-	char	*west_tex_path;
-	t_rgb	floor_rgb;
-	t_rgb	ceilllig_rgb;
-	void	*wall_textures[4];
-	int		checker_flag;
-}				t_assets;
+	char		*north_tex_path;
+	char		*east_tex_path;
+	char		*south_tex_path;
+	char		*west_tex_path;
+	t_rgb		floor_rgb;
+	t_rgb		ceilllig_rgb;
+	t_texture	textures[4];
+	int			checker_flag;
+}	t_assets;
 
 typedef struct s_list
 {
@@ -280,5 +292,6 @@ void	cast_one_ray(t_game *game, int i);
 void	store_final_hit(t_game *game, float h_dist, float v_dist, int i);
 void	render_3d_projaction(t_game *game);
 void	render_minimap(t_game *game);
+void	load_textures(t_game *game);
 
 #endif
