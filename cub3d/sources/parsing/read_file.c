@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:03 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/25 11:55:05 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/25 14:57:27 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,15 @@ static int	is_line_empty(char *line)
 	return (FALSE);
 }
 
-static int is_map_line(char *line)
+static int	is_map_line(char *line)
 {
-   int i = 0;
-   while (line[i] == ' ' || line[i] == '\t')
-       i++;
-   return (ft_strchr("01", line[i]) != NULL);
+	int	i;
+
+	i = 0;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	return (ft_strchr("01", line[i]) != NULL);
 }
-
-// static int	is_map_line(char *line)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (line[i] == ' ' || line[i] == '\t')
-// 		i++;
-// 	if (line[i] == WALL)
-// 		return (TRUE);
-// 	return (FALSE);
-// }
 
 static void	handle_line_split(char *line_content,
 		int *map_has_started, t_list **id_lines, t_list **map_lines)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:40:57 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/25 11:07:11 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/25 14:58:09 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	validate_walls_are_closed(t_game *data)
 {
 	char	**map_copy;
 
-	// if (data->map.width > 200 || data->map.height > 200)
-	// {
-	// 	exit_with_error("the map too big", data);
-	// }
+	if (data->map.width > 400 || data->map.height > 400)
+	{
+		exit_with_error("+400: the map too big", data);
+	}
 	map_copy = duplicate_grid(data->map.grid, data->map.height);
 	if (!map_copy)
 		exit_with_error("Malloc failed for map copy.", data);

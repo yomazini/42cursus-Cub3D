@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/25 11:53:18 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/25 14:59:01 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@
 # define WINDOW_WIDTH 1280
 # define TILE_SIZE 64
 
-#define MINIMAP_WIDTH_IN_PIXELS  200
-#define MINIMAP_HEIGHT_IN_PIXELS  200
-#define MINIMAP_CENTER_X  100
-#define MINIMAP_CENTER_Y  100
-#define MINIMAP_VIEW_RADIUS_IN_TILES  4
+# define MINIMAP_WIDTH_IN_PIXELS 200
+# define MINIMAP_HEIGHT_IN_PIXELS 200
+# define MINIMAP_CENTER_X  100
+# define MINIMAP_CENTER_Y  100
+# define MINIMAP_VIEW_RADIUS_IN_TILES  4
 
 # define MINIMAP_SCALE_FACTOR 0.3
 
-# define MINIMAP_TILE_SIZE  (TILE_SIZE * MINIMAP_SCALE_FACTOR)
-//
+# define MINIMAP_TILE_SIZE (TILE_SIZE * MINIMAP_SCALE_FACTOR)
 
 // # define WALL_COLOR 0x37CACEFF
 // # define FLOOR_COLOR 0xFFFFFFFF
@@ -208,7 +207,6 @@ typedef struct s_rgb_validator
 	t_game	*data;
 }	t_rgb_validator;
 
-// LIB
 int		ft_atoi(const char *str);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
