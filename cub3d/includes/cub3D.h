@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/18 18:08:38 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/19 13:56:39 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define TILE_SIZE 64
 # define MINIMAP_SCALE_FACTOR 0.3
 # define PI 3.1415926535
-# define FOV 1.0471975512
+# define FOV (60 * (PI / 180.0))
 # define NAME "cub3D"
 # define TRUE 1
 # define FALSE 0
