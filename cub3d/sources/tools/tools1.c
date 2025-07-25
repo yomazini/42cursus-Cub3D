@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:42:44 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/18 19:39:11 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/24 18:08:13 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	exit_with_error(char *message, t_game *data)
 		if (data->asset_data.east_tex_path)
 			free(data->asset_data.east_tex_path);
 		if (data->asset_data.west_tex_path)
-			free(data->asset_data.east_tex_path);
+			free(data->asset_data.west_tex_path);
 		if (data->map.grid)
 			free_grid(data->map.grid);
 		exit(1);
