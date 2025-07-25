@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/25 07:49:39 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/25 13:23:04 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static int	handle_line(char *line, int *reach_map, t_list **head_list)
 	to_test_map_reach = ft_strtrim(line, " ");
 	if (!to_test_map_reach)
 		exit_with_error("alloc failed in trim", NULL);
+	// if (ft_strchr("01NSWE", to_test_map_reach[0]))
 	if (to_test_map_reach[0] == '1')
 		*reach_map = TRUE;
 	if (line[0] == '\n' && *reach_map == FALSE)
