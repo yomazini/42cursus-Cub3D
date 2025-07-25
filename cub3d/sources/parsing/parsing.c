@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/24 17:55:06 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/25 07:49:39 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	handle_line(char *line, int *reach_map, t_list **head_list)
 		exit(1);
 	}
 	ft_lstadd_back(head_list, new_node);
-	free(to_test_map_reach);
+	// free(to_test_map_reach); // double free here fo ymazini to handle
 	return (1);
 }
 

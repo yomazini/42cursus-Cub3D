@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 11:07:14 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/17 11:13:10 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/25 13:00:56 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool	hit_wall(t_game *game, float x, float y)
 	int	map_x;
 	int	map_y;
 
-	if (x < 0 || x >= WINDOW_WIDTH || y < 0 || y >= WINDOW_HEIGHT)
+	if (x < 0 || x >= (game->map.width * TILE_SIZE) || y < 0 || y >= (game->map.height * TILE_SIZE))
 		return (true);
 	map_x = floor(x / TILE_SIZE);
 	map_y = floor(y / TILE_SIZE);

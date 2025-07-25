@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 11:10:41 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/17 11:13:01 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/25 12:59:02 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,6 @@ static void	init_horizontal_dda(t_game *game, t_dda *dda, int i)
 	dda->next_y = dda->y_intercept;
 }
 
-
-static bool	find_horizontal_intersection(t_game *game, int i)
-{
-	t_dda	dda;
-	
-	initiatize_rayfacing(game, game->rays[i].ray_angle, i);
-	init_horizontal_dda(game, &dda, i);
-	while (dda.next_x >= 0 && dda.next_x <= WINDOW_WIDTH
-		&& dda.next_y >= 0 && dda.next_y <= WINDOW_HEIGHT)
-	{
-		float y_to_check = dda.next_y;
-		if (game->rays[i].is_ray_facing_up)
-    		y_to_check -= 1;
-		if (hit_wall(game, dda.next_x, y_to_check))
-		{
-			game->rays[i].horzhit_x = dda.next_x;
-			game->rays[i].horzhit_y = dda.next_y;
-			return (true);
-		}
-		dda.next_x += dda.x_step;
-		dda.next_y += dda.y_step;
-	}
-	return (false);
-}
-
 static void	init_vertical_dda(t_game *game, t_dda *dda, int i)
 {
 	dda->x_intercept = floor(game->player.x / TILE_SIZE) * TILE_SIZE;
@@ -72,14 +47,39 @@ static void	init_vertical_dda(t_game *game, t_dda *dda, int i)
 	dda->next_x = dda->x_intercept;
 	dda->next_y = dda->y_intercept;
 }
+
+static bool	find_horizontal_intersection(t_game *game, int i)
+{
+	t_dda	dda;
+	
+	initiatize_rayfacing(game, game->rays[i].ray_angle, i);
+	init_horizontal_dda(game, &dda, i);
+	while (dda.next_x >= 0 && dda.next_x <= (game->map.width * TILE_SIZE)
+		&& dda.next_y >= 0 && dda.next_y <= (game->map.height * TILE_SIZE))
+	{
+		float y_to_check = dda.next_y;
+		if (game->rays[i].is_ray_facing_up)
+    		y_to_check -= 1;
+		if (hit_wall(game, dda.next_x, y_to_check))
+		{
+			game->rays[i].horzhit_x = dda.next_x;
+			game->rays[i].horzhit_y = dda.next_y;
+			return (true);
+		}
+		dda.next_x += dda.x_step;
+		dda.next_y += dda.y_step;
+	}
+	return (false);
+}
+
 static bool	find_vertocal_intersection(t_game *game, int i)
 {
 	t_dda	dda;
 	
 	initiatize_rayfacing(game, game->rays[i].ray_angle, i);
 	init_vertical_dda(game, &dda, i);
-	while (dda.next_x >= 0 && dda.next_x <= WINDOW_WIDTH
-		&& dda.next_y >= 0 && dda.next_y <= WINDOW_HEIGHT)
+	while (dda.next_x >= 0 && dda.next_x <= (game->map.width * TILE_SIZE)
+		&& dda.next_y >= 0 && dda.next_y <= (game->map.height * TILE_SIZE))
 	{
 		float x_to_check = dda.next_x;
 		if (game->rays[i].is_ray_facing_left)

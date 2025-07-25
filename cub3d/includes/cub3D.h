@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/19 13:56:39 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/25 11:53:18 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,31 @@
 # define WINDOW_HEIGHT 720
 # define WINDOW_WIDTH 1280
 # define TILE_SIZE 64
+
+#define MINIMAP_WIDTH_IN_PIXELS  200
+#define MINIMAP_HEIGHT_IN_PIXELS  200
+#define MINIMAP_CENTER_X  100
+#define MINIMAP_CENTER_Y  100
+#define MINIMAP_VIEW_RADIUS_IN_TILES  4
+
 # define MINIMAP_SCALE_FACTOR 0.3
+
+# define MINIMAP_TILE_SIZE  (TILE_SIZE * MINIMAP_SCALE_FACTOR)
+//
+
+// # define WALL_COLOR 0x37CACEFF
+// # define FLOOR_COLOR 0xFFFFFFFF
+
 # define PI 3.1415926535
 # define FOV (60 * (PI / 180.0))
 # define NAME "cub3D"
 # define TRUE 1
 # define FALSE 0
 # define BUFFER_SIZE 5
+
 # define WALL '1'
 # define FLOOR '0'
+
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
@@ -256,6 +272,7 @@ void	ft_render(t_game *game);
 float	normalize_angle(float angle);
 void	cast_rays(t_game *game);
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+void	my_mlx_pixel_put_minimap(t_game *game, int x, int y, int color);
 bool	hit_wall(t_game *game, float x, float y);
 void	update_player(t_game *game);
 void	draw_line(t_game *game, float x1, float y1, float x2, float y2);
@@ -264,5 +281,6 @@ void	initiatize_rayfacing(t_game *game, float ray_angle, int i);
 void	cast_one_ray(t_game *game, int i);
 void	store_final_hit(t_game *game, float h_dist, float v_dist, int i);
 void	render_3d_projaction(t_game *game);
+void	render_minimap(t_game *game);
 
 #endif

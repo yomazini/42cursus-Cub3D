@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 11:19:07 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/19 13:59:37 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/25 11:45:43 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	render_3d_projaction(t_game *game)
 	while (i < WINDOW_WIDTH)
 	{
 		t.corrected_dist = game->rays[i].distance
-			* cos(game->rays[i].ray_angle - game->player.rotation_angle);		
+			* cos(game->rays[i].ray_angle - game->player.rotation_angle);	
 		t.projected_wall_height = (TILE_SIZE / t.corrected_dist) * t.dist_to_proj_plane;
 		
 		t.wall_top_pixel = (WINDOW_HEIGHT / 2) - (t.projected_wall_height / 2);

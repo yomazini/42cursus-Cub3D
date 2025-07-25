@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 14:35:30 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/19 13:42:24 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/25 09:55:50 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void	update_player(t_game *game)
     float strafe_x = cos(p.strafe_angle) * p.strafe_step;
     float strafe_y = sin(p.strafe_angle) * p.strafe_step;
 	p.new_x = game->player.x + p.move_x + strafe_x;
-    p.new_y = game->player.y + p.move_y + strafe_y;	
-	if(!hit_wall(game, p.new_x, p.new_y))
+	if(!hit_wall(game, p.new_x, game->player.y))
 		game->player.x = p.new_x;
-	if(!hit_wall(game, p.new_x, p.new_y))
+    p.new_y = game->player.y + p.move_y + strafe_y;	
+	if(!hit_wall(game, game->player.x, p.new_y))
 		game->player.y = p.new_y;
 }
 
