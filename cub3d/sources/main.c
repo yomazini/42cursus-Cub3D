@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/26 11:25:54 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/26 17:59:55 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ bool	launch_game(t_game *game)
 }
 
 // TODO: NOtes later Validate texture file formats end with xpm or if failed return sometests give invalid xpm fls {echo "dummy" > north.xpm}
+
+// TODO: SWITCH N WITH E AND VIS VERSA
 
 int	main(int ac, char **av)
 {

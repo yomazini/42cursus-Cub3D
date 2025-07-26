@@ -1,11 +1,11 @@
 
-      F 22 , 180,    250
 
   NO   ./textures/north_texture.xpm
 
 
-C       102,  20, 3
+C 50,45,40
 
+F 85,75,65
 
   SO      ./textures/south_texture.xpm
   EA   ./textures/east_texture.xpm

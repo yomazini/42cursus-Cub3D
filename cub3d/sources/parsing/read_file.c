@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:03 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/25 14:57:27 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/26 17:49:37 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,30 @@ void	separate_file_content(t_list *all_lines,
 		handle_line_split(line_content, &map_has_started, id_lines, map_lines);
 		current_node = current_node->next;
 	}
+}
+
+t_list	*read_file_to_list(char *filename)
+{
+	int		fd;
+	char	*line;
+	t_list	*head_list;
+	int		reach_map;
+
+	reach_map = FALSE;
+	head_list = NULL;
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putstr_fd("can not open the file\n", 2);
+		exit(1);
+	}
+	while (TRUE)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		handle_line(line, &reach_map, &head_list);
+	}
+	close(fd);
+	return (head_list);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/26 13:34:14 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/26 17:35:03 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,6 +276,7 @@ int		is_string_purely_numeric(const char *str);
 int		is_string_numeric(const char *str);
 int		count_char_in_string(const char *str, char c);
 char	*reconstruct_color_string(char **tokens, int token_count);
+int		handle_line(char *line, int *reach_map, t_list **head_list);
 
 // Helpers Func
 void	exit_with_error(char *message, t_game *game);

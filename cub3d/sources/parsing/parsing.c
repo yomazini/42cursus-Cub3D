@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/26 12:08:29 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/26 17:34:08 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,9 @@ int	validate_filename(char *filename)
 	return (ft_strncmp(filename + str_len - 4, extention, 4) == 0);
 }
 
-static int	handle_line(char *line, int *reach_map, t_list **head_list)
+static int	check_newline_cases(char *line,
+	int *reach_map, char *to_test_map_reach)
 {
-	t_list	*new_node;
-	char	*to_test_map_reach;
-	char	*trimmed_line;
-
-	to_test_map_reach = ft_strtrim(line, " ");
-	if (!to_test_map_reach)
-	{
-		free(line);
-		exit_with_error("alloc failed in trim", NULL);
-	}
-	if (to_test_map_reach[0] == '1')
-		*reach_map = TRUE;
 	if (line[0] == '\n' && *reach_map == FALSE)
 	{
 		(free(to_test_map_reach), free(line));
@@ -60,6 +49,15 @@ static int	handle_line(char *line, int *reach_map, t_list **head_list)
 		(free(to_test_map_reach), free(line));
 		exit_with_error("Ops Trickkkky NL", NULL);
 	}
+	return (1);
+}
+
+static void	create_and_add_node(char *line, t_list **head_list,
+								char *to_test_map_reach)
+{
+	t_list	*new_node;
+	char	*trimmed_line;
+
 	trimmed_line = ft_trim_new_line(line);
 	new_node = ft_lstnew(ft_strdup(trimmed_line));
 	free(line);
@@ -70,32 +68,23 @@ static int	handle_line(char *line, int *reach_map, t_list **head_list)
 		exit(1);
 	}
 	ft_lstadd_back(head_list, new_node);
-	free(to_test_map_reach);
-	return (1);
 }
 
-t_list	*read_file_to_list(char *filename)
+int	handle_line(char *line, int *reach_map, t_list **head_list)
 {
-	int		fd;
-	char	*line;
-	t_list	*head_list;
-	int		reach_map;
+	char	*to_test_map_reach;
 
-	reach_map = FALSE;
-	head_list = NULL;
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
+	to_test_map_reach = ft_strtrim(line, " ");
+	if (!to_test_map_reach)
 	{
-		ft_putstr_fd("can not open the file\n", 2);
-		exit(1);
+		free(line);
+		exit_with_error("alloc failed in trim", NULL);
 	}
-	while (TRUE)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		handle_line(line, &reach_map, &head_list);
-	}
-	close(fd);
-	return (head_list);
+	if (to_test_map_reach[0] == '1')
+		*reach_map = TRUE;
+	if (!check_newline_cases(line, reach_map, to_test_map_reach))
+		return (0);
+	create_and_add_node(line, head_list, to_test_map_reach);
+	free(to_test_map_reach);
+	return (1);
 }
