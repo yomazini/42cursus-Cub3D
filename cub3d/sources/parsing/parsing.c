@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:01:26 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/25 14:54:54 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/26 12:08:29 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,38 @@ static int	handle_line(char *line, int *reach_map, t_list **head_list)
 {
 	t_list	*new_node;
 	char	*to_test_map_reach;
+	char	*trimmed_line;
 
 	to_test_map_reach = ft_strtrim(line, " ");
 	if (!to_test_map_reach)
+	{
+		free(line);
 		exit_with_error("alloc failed in trim", NULL);
+	}
 	if (to_test_map_reach[0] == '1')
 		*reach_map = TRUE;
 	if (line[0] == '\n' && *reach_map == FALSE)
-		return (free(to_test_map_reach), 0);
+	{
+		(free(to_test_map_reach), free(line));
+		return (0);
+	}
 	if (line[0] == '\n' && *reach_map == TRUE)
 	{
-		free(to_test_map_reach);
+		(free(to_test_map_reach), free(line));
 		exit_with_error("Ops Trickkkky NL", NULL);
 	}
-	new_node = ft_lstnew(ft_trim_new_line(line));
-	if (!new_node)
+	trimmed_line = ft_trim_new_line(line);
+	new_node = ft_lstnew(ft_strdup(trimmed_line));
+	free(line);
+	if (!new_node || !new_node->content)
 	{
-		(free(line), free(to_test_map_reach));
+		free(to_test_map_reach);
 		ft_lstclear(head_list, free);
 		exit(1);
 	}
 	ft_lstadd_back(head_list, new_node);
 	free(to_test_map_reach);
-	return (to_test_map_reach = NULL, 1);
+	return (1);
 }
 
 t_list	*read_file_to_list(char *filename)
