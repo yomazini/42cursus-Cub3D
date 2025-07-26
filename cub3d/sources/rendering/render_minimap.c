@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 07:53:33 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/26 13:28:42 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/26 14:15:22 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	render_loop(t_game *game, t_mini *m)
 	&& m->grid_x < game->map.width && game->map.grid[m->grid_y][m->grid_x] != ' ')
 	{
 		if (game->map.grid[m->grid_y][m->grid_x] == '1')
-			my_mlx_pixel_put_minimap(game, m->mx, m->my, 0x37CACEFF);
+			my_mlx_pixel_put_minimap(game, m->mx, m->my, WALL_COLOR);
 		else
-			my_mlx_pixel_put_minimap(game, m->mx, m->my, 0xFFFFFFFF);
+			my_mlx_pixel_put_minimap(game, m->mx, m->my, FLOOR_COLOR);
 	}
 	else
 		my_mlx_pixel_put_minimap(game, m->mx, m->my, 0x000000);
