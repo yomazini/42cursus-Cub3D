@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/25 15:01:36 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/26 11:22:25 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_rgb
 	int	green;
 	int	blue;
 	int	is_set;
+	int	hex_color;
 }				t_rgb;
 
 typedef struct s_texture
@@ -275,6 +276,7 @@ char	*reconstruct_color_string(char **tokens, int token_count);
 void	exit_with_error(char *message, t_game *game);
 void	free_grid(char **grid);
 int		exit_game(t_game *game);
+int		rgb_to_hex_math(int r, int g, int b);
 
 // Rendring Func
 bool	intialize_mlx(t_game *game);

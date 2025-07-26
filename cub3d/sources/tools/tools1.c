@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:42:44 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/25 11:44:14 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/26 11:27:22 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,9 @@ int	count_tokens(char **tokens)
 	while (tokens[i])
 		i++;
 	return (i);
+}
+
+int	rgb_to_hex_math(int r, int g, int b)
+{
+	return (r * 65536 + g * 256 + b);
 }

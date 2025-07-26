@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:09 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/24 18:00:59 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/26 11:40:14 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,16 @@ static void	assign_color_to_data(char **tokens, int *rgb, t_game *data)
 		if (data->checklist.f == 1)
 			exit_with_error("Duplicate F identifier.", data);
 		data->checklist.f = 1;
-		data->asset_data.floor_rgb = (t_rgb){rgb[0], rgb[1], rgb[2], 1};
+		data->asset_data.floor_rgb = (t_rgb){rgb[0], rgb[1], rgb[2], 1,
+			rgb_to_hex_math(rgb[0], rgb[1], rgb[2])};
 	}
 	else if (ft_strncmp("C", tokens[0], 2) == 0)
 	{
 		if (data->checklist.c == 1)
 			exit_with_error("Duplicate C identifier.", data);
 		data->checklist.c = 1;
-		data->asset_data.ceilllig_rgb = (t_rgb){rgb[0], rgb[1], rgb[2], 1};
+		data->asset_data.ceilllig_rgb = (t_rgb){rgb[0], rgb[1], rgb[2], 1,
+			rgb_to_hex_math(rgb[0], rgb[1], rgb[2])};
 	}
 }
 

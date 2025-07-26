@@ -8,10 +8,9 @@ WE ./textures/east_texture.xpm
 SO ./textures/east_texture.xpm
 
 
+C 255,100 ,0
 
-C 225,30,0
-
-F 220,100,0
+F 65,99,197
 
 01111111
 10000001

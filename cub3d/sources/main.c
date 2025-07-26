@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/25 15:05:57 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/26 11:25:54 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static void	print_parsed_data(t_game *data)
 	printf("   SO: %s\n", data->asset_data.south_tex_path);
 	printf("   WE: %s\n", data->asset_data.west_tex_path);
 	printf("   EA: %s\n", data->asset_data.east_tex_path);
-	printf("✅ Floor Color:   R=%d, G=%d, B=%d\n", data->asset_data.floor_rgb.red,
-		data->asset_data.floor_rgb.green, data->asset_data.floor_rgb.blue);
-	printf("✅ Ceiling Color: R=%d, G=%d, B=%d\n", data->asset_data.ceilllig_rgb.red,
-		data->asset_data.ceilllig_rgb.green, data->asset_data.ceilllig_rgb.blue);
+	printf("✅ Floor Color:   R=%d, G=%d, B=%d\n HEX=%d\n", data->asset_data.floor_rgb.red,
+		data->asset_data.floor_rgb.green, data->asset_data.floor_rgb.blue, data->asset_data.floor_rgb.hex_color);
+	printf("✅ Ceiling Color: R=%d, G=%d, B=%d\n HEX=%d\n", data->asset_data.ceilllig_rgb.red,
+		data->asset_data.ceilllig_rgb.green, data->asset_data.ceilllig_rgb.blue, data->asset_data.ceilllig_rgb.hex_color);
 	printf("\n--- MAP DATA ---\n");
 	printf("Player Start: (x=%.1f, y=%.1f), Facing: %c\n", data->map.map_player_x,
 		data->map.map_player_y, data->map.spawn_side_face);
