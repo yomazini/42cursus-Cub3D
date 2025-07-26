@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 09:31:10 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/26 13:12:05 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/26 14:42:12 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ bool	intialize_mlx(t_game *game)
 	load_textures(game);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_hook(game->win, 17, 0, ft_exit, game);
-	 mlx_hook(game->win, 2, 1L<<0, key_press_hook, game);
+	mlx_hook(game->win, 2, 1L<<0, key_press_hook, game);
     mlx_hook(game->win, 3, 1L<<1, key_release_hook, game);
 	mlx_loop(game->mlx);
 	return (true);		

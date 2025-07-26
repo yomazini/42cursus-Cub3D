@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 11:19:07 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/26 13:11:31 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/26 14:42:48 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static void	draw_wall_stripe(t_game *game, t_3d *t, int i)
 		if (tex_x >= tex->width) tex_x = tex->width - 1;
 		if (tex_y < 0) tex_y = 0;
 		if (tex_y >= tex->height) tex_y = tex->height - 1;
-		
 		color = *(unsigned int *)(tex->addr + (tex_y * tex->line_len
 					+ tex_x * (tex->bpp / 8)));
 		my_mlx_pixel_put(game, i, y, color);
@@ -79,6 +78,25 @@ static void	draw_wall_stripe(t_game *game, t_3d *t, int i)
 		D = A/B * C   
 */
 
+void	render_3d(t_game *game, t_3d *t, int i)
+{
+	int	y;
+
+	y = 0;
+	while (y < t->wall_top_pixel)
+	{
+		my_mlx_pixel_put(game, i, y, game->asset_data.ceilllig_rgb.hex_color);
+		y++;
+	}
+	draw_wall_stripe(game, t, i);
+	y = t->wall_bottom_pixel;
+	while (y < WINDOW_HEIGHT)
+	{
+		my_mlx_pixel_put(game, i, y, game->asset_data.floor_rgb.hex_color);	
+		y++;
+	}
+}
+
 void	render_3d_projaction(t_game *game)
 {
 	t_3d	t;
@@ -90,10 +108,8 @@ void	render_3d_projaction(t_game *game)
 	{
 		t.corrected_dist = game->rays[i].distance
 			* cos(game->rays[i].ray_angle - game->player.rotation_angle);
-
 		t.projected_wall_height = (TILE_SIZE / t.corrected_dist)
 			* t.dist_to_proj_plane;
-
 		t.wall_top_pixel = (WINDOW_HEIGHT / 2)
 			- (t.projected_wall_height / 2);
 
@@ -105,12 +121,8 @@ void	render_3d_projaction(t_game *game)
 
 		if (t.wall_bottom_pixel > WINDOW_HEIGHT)
 			t.wall_bottom_pixel = WINDOW_HEIGHT;
-			
-		for (int y = 0; y < t.wall_top_pixel; y++)
-			my_mlx_pixel_put(game, i, y, game->asset_data.ceilllig_rgb.hex_color); // Or your ceiling color
-		draw_wall_stripe(game, &t, i);
-		for (int y = t.wall_bottom_pixel; y < WINDOW_HEIGHT; y++)
-			my_mlx_pixel_put(game, i, y, game->asset_data.floor_rgb.hex_color); // Or your floor color
+		
+		render_3d(game, &t, i);
 		i++;
 	}
 }

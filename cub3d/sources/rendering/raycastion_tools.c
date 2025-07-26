@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 11:07:14 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/25 13:00:56 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/26 14:25:40 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,33 @@ float distance(float x1, float y1, float x2, float y2)
 	return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
-void draw_line(t_game *game, float x1, float y1, float x2, float y2)
-{
-	t_line	line;
+// void draw_line(t_game *game, float x1, float y1, float x2, float y2)
+// {
+// 	t_line	line;
 	
-	line.dx = x2 - x1;
-	line.dy = y2 - y1;
-    if (fabs(line.dx) > fabs(line.dy))
-        line.steps = fabs(line.dx);
-    else
-        line.steps = fabs(line.dy);
-	 if (line.steps == 0)
-	{
-        my_mlx_pixel_put(game, round(x1), round(y1), 0x00FF0000);
-        return;
-    }
-    line.x_inc = line.dx / (float)line.steps;
-    line.y_inc = line.dy / (float)line.steps;
-    line.x = x1;
-    line.y = y1;
-    for (int i = 0; i <= line.steps; i++)
-    {
-        if (line.x >= 0 && line.x < WINDOW_WIDTH&& line.y >= 0 && line.y < WINDOW_HEIGHT)
-        	my_mlx_pixel_put(game, round(line.x), round(line.y), 0x652424);
-		line.x += line.x_inc;
-		line.y += line.y_inc;
-    }
-}
+// 	line.dx = x2 - x1;
+// 	line.dy = y2 - y1;
+//     if (fabs(line.dx) > fabs(line.dy))
+//         line.steps = fabs(line.dx);
+//     else
+//         line.steps = fabs(line.dy);
+// 	 if (line.steps == 0)
+// 	{
+//         my_mlx_pixel_put(game, round(x1), round(y1), 0x00FF0000);
+//         return;
+//     }
+//     line.x_inc = line.dx / (float)line.steps;
+//     line.y_inc = line.dy / (float)line.steps;
+//     line.x = x1;
+//     line.y = y1;
+//     for (int i = 0; i <= line.steps; i++)
+//     {
+//         if (line.x >= 0 && line.x < WINDOW_WIDTH && line.y >= 0 && line.y < WINDOW_HEIGHT)
+//         	my_mlx_pixel_put(game, round(line.x), round(line.y), 0x652424);
+// 		line.x += line.x_inc;
+// 		line.y += line.y_inc;
+//     }
+// }
 
 void	initiatize_rayfacing(t_game *game, float ray_angle, int i)
 {

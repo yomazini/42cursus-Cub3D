@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/26 17:35:03 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/26 18:12:00 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@
 # define MINIMAP_CENTER_Y  100
 # define MINIMAP_VIEW_RADIUS_IN_TILES  4
 
-# define MINIMAP_SCALE_FACTOR 0.3
+// # define MINIMAP_SCALE_FACTOR 0.3
 
-# define MINIMAP_TILE_SIZE (TILE_SIZE * MINIMAP_SCALE_FACTOR)
+// # define MINIMAP_TILE_SIZE (TILE_SIZE * MINIMAP_SCALE_FACTOR)
 
-// # define WALL_COLOR 0x37CACEFF
-// # define FLOOR_COLOR 0xFFFFFFFF
+# define WALL_COLOR 0x37CACEFF
+# define FLOOR_COLOR 0xFFFFFFFF
 
 # define PI 3.1415926535
 # define FOV (60 * (PI / 180.0))
