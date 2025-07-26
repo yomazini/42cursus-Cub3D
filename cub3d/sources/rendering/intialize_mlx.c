@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 09:31:10 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/25 13:51:16 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/26 13:12:05 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ bool	intialize_mlx(t_game *game)
 	game->player.turn_direction = 0;
 	game->player.walk_direction = 0;
 	game->player.strafe_direction = 0;
-	game->player.move_speed = 4;
-	game->player.rotation_speed = 1 * (PI / 180);
+	game->player.move_speed = 5;
+	game->player.rotation_speed = 2 * (PI / 180);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (false);

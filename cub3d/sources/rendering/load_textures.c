@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 13:28:42 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/25 13:38:01 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/26 11:59:46 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static void	load_one_texture(t_game *game, t_texture *tex, char *path)
 
 void	load_textures(t_game *game)
 {
-	load_one_texture(game, &game->asset_data.textures[0],
+	load_one_texture(game, &game->asset_data.textures[NORTH],
 		game->asset_data.north_tex_path);
-	load_one_texture(game, &game->asset_data.textures[1],
+	load_one_texture(game, &game->asset_data.textures[SOUTH],
 		game->asset_data.south_tex_path);
-	load_one_texture(game, &game->asset_data.textures[2],
+	load_one_texture(game, &game->asset_data.textures[WEST],
 		game->asset_data.west_tex_path);
-	load_one_texture(game, &game->asset_data.textures[3],
+	load_one_texture(game, &game->asset_data.textures[EAST],
 		game->asset_data.east_tex_path);
 }

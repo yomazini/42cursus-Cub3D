@@ -1,7 +1,7 @@
-EA ./textures/east_texture.xpm
-WE ./textures/west_texture.xpm
-NO ./textures/north_texture.xpm
-SO ./textures/south_texture.xpm
+EA ./textures/pack2/east.xpm
+WE ./textures/pack2/west.xpm
+NO ./textures/pack2/north.xpm
+SO ./textures/pack2/south.xpm
 
 F 28, 28, 28
 C 20,20,20

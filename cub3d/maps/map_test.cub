@@ -11,7 +11,7 @@ C       102,  20, 3
   EA   ./textures/east_texture.xpm
 
 
-  WE ./textures/wall.xpm
+  WE ./textures/west_texture.xpm
 
 
 
