@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 10:41:02 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/27 13:04:33 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,16 @@ void	run_parser(char *filename, t_game *game)
 	validate_walls_are_closed(game);
 }
 
-
 bool	launch_game(t_game *game)
 {
 	intialize_mlx(game);
 	return (true);
 }
 
-// TODO: NOtes later Validate texture file formats end with xpm or if failed return sometests give invalid xpm fls {echo "dummy" > north.xpm}
-
-// TODO: SWITCH N WITH E AND VIS VERSA
-
 int	main(int ac, char **av)
 {
 	t_game	game;
+
 	if (ac != 2)
 	{
 		ft_putstr_fd("Usage: ./cub3D <path_to_map.cub>\n", 2);
