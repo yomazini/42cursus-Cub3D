@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 09:31:10 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/27 11:23:13 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 11:29:57 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ static int	key_release_hook(int keycode, t_game *game)
 	return (0);
 }
 
-
-bool	intialize_mlx(t_game *game)
+static void	init(t_game *game)
 {
 	game->player.x = game->map.map_player_x * TILE_SIZE;
 	game->player.y = game->map.map_player_y * TILE_SIZE;
@@ -59,6 +58,11 @@ bool	intialize_mlx(t_game *game)
 	game->player.strafe_direction = 0;
 	game->player.move_speed = 5;
 	game->player.rotation_speed = 2 * (PI / 180);
+}
+
+bool	intialize_mlx(t_game *game)
+{
+	init(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (false);
