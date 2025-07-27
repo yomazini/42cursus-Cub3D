@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:52:25 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/27 14:49:45 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 15:23:05 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ int	fexit(t_game *game)
     	free(game->asset_data.west_tex_path);
 	if (game->asset_data.east_tex_path)
     	free(game->asset_data.east_tex_path);
-	printf("Error: Rendering\n");
     exit(1);
 }
