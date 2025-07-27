@@ -25,11 +25,8 @@ MAND_SRCS	=	cub3D.c \
 				rendering/raycastion_tools.c \
 				rendering/cast_one_ray.c \
 				rendering/my_mlx_pixel_put.c \
-				rendering/my_mlx_pixel_put_minimap.c \
 				rendering/fexit.c \
-				rendering/mouse_move.c \
 				rendering/draw_3D.c \
-				rendering/render_minimap.c \
 				rendering/load_textures.c \
 				rendering/render_3d.c \
 				rendering/rotation_angle.c \

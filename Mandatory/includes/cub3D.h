@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 11:46:18 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/27 12:52:20 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,7 +310,6 @@ void	ft_render(t_game *game);
 float	normalize_angle(float angle);
 void	cast_rays(t_game *game);
 void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
-void	my_mlx_pixel_put_minimap(t_game *game, int x, int y, int color);
 bool	hit_wall(t_game *game, float x, float y);
 void	update_player(t_game *game);
 float	distance(float x1, float y1, float x2, float y2);
@@ -319,9 +318,7 @@ void	cast_one_ray(t_game *game, int i);
 void	store_final_hit(t_game *game, float h_dist, float v_dist, int i);
 void	render_3d_projaction(t_game *game);
 void	render_3d(t_game *game, t_3d *t, int i);
-void	render_minimap(t_game *game);
 void	load_textures(t_game *game);
 int		fexit(t_game *game);
-int		mouse_move(int x, int y, t_game *game);
 
 #endif

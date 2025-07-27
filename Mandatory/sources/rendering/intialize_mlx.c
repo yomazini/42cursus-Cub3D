@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 09:31:10 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/27 12:40:26 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 12:49:44 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ bool	intialize_mlx(t_game *game)
 	mlx_hook(game->win, 17, 0, fexit, game);
 	mlx_hook(game->win, 2, 1L << 0, key_press_hook, game);
 	mlx_hook(game->win, 3, 1L << 1, key_release_hook, game);
-	mlx_hook(game->win, 6, 1L << 6, mouse_move, game);
-	mlx_mouse_hide();
 	mlx_loop(game->mlx);
 	return (true);
 }

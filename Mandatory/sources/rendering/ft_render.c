@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 14:42:51 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/26 13:28:34 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 12:49:35 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,5 @@ void	ft_render(t_game *game)
 	update_player(game);
 	cast_rays(game);
 	render_3d_projaction(game);
-	render_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img.img_ptr, 0, 0);
 }

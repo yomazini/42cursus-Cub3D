@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 10:34:45 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/27 12:48:39 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	run_parser(char *filename, t_game *game)
 
 bool	launch_game(t_game *game)
 {
-	intialize_mlx(game);
+	if (!intialize_mlx(game))
+		return (false);
 	return (true);
 }
 
@@ -86,7 +87,8 @@ int	main(int ac, char **av)
 	run_parser(av[1], &game);
 	print_parsed_data(&game);
 	sleep(1);
-	launch_game(&game);
+	if (!launch_game(&game))
+		return (EXIT_FAILURE);
 	free_grid(game.map.grid);
 	free(game.asset_data.north_tex_path);
 	free(game.asset_data.south_tex_path);
