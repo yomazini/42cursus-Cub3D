@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 12:52:20 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 13:04:57 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # define FLOOR_COLOR 0xFFFFFFFF
 
 # define PI 3.1415926535
-# define FOV (60 * (PI / 180.0))
+# define FOV 1.0472
 # define NAME "cub3D"
 # define TRUE 1
 # define FALSE 0
@@ -59,8 +59,6 @@
 # define KEY_ESC 53
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
-// # define KEY_UP 126
-// # define KEY_DOWN 125
 
 typedef struct s_rgb
 {
@@ -81,7 +79,7 @@ typedef struct s_wall_strip_data
 }	t_ws;
 
 typedef struct s_minimap_scale
-{	
+{
 	int		mx;
 	int		my;
 	float	scale;
@@ -90,7 +88,6 @@ typedef struct s_minimap_scale
 	int		grid_x;
 	int		grid_y;	
 }	t_mini;
-
 
 typedef struct s_texture
 {

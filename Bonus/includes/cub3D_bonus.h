@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 11:16:23 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/27 13:02:39 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
@@ -39,7 +38,7 @@
 # define FLOOR_COLOR 0xFFFFFFFF
 
 # define PI 3.1415926535
-# define FOV (60 * (PI / 180.0))
+# define FOV 1.0472
 # define NAME "cub3D"
 # define TRUE 1
 # define FALSE 0
@@ -82,7 +81,7 @@ typedef struct s_wall_strip_data
 }	t_ws;
 
 typedef struct s_minimap_scale
-{	
+{
 	int		mx;
 	int		my;
 	float	scale;
@@ -91,7 +90,6 @@ typedef struct s_minimap_scale
 	int		grid_x;
 	int		grid_y;	
 }	t_mini;
-
 
 typedef struct s_texture
 {
@@ -103,7 +101,6 @@ typedef struct s_texture
 	int		line_len;
 	int		endian;
 }	t_texture;
-
 
 typedef struct s_assets
 {
