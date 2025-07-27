@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/26 18:12:00 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/27 09:06:56 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@
 # define MINIMAP_CENTER_Y  100
 # define MINIMAP_VIEW_RADIUS_IN_TILES  4
 
-// # define MINIMAP_SCALE_FACTOR 0.3
-
-// # define MINIMAP_TILE_SIZE (TILE_SIZE * MINIMAP_SCALE_FACTOR)
 
 # define WALL_COLOR 0x37CACEFF
 # define FLOOR_COLOR 0xFFFFFFFF
@@ -71,7 +68,28 @@ typedef struct s_rgb
 	int	blue;
 	int	is_set;
 	int	hex_color;
-}				t_rgb;
+}	t_rgb;
+
+typedef struct s_wall_strip_data
+{
+	int			tex_x;
+	int			tex_y;
+	int			color;
+	float		y_step;
+	float		tex_pos;
+}	t_ws;
+
+typedef struct s_minimap_scale
+{	
+	int		mx;
+	int		my;
+	float	scale;
+	float	world_x;
+	float	world_y;
+	int		grid_x;
+	int		grid_y;	
+}	t_mini;
+
 
 typedef struct s_texture
 {
@@ -286,6 +304,7 @@ int		rgb_to_hex_math(int r, int g, int b);
 
 // Rendring Func
 bool	intialize_mlx(t_game *game);
+float	rotation_angle(t_game *game);
 void	ft_render(t_game *game);
 float	normalize_angle(float angle);
 void	cast_rays(t_game *game);
@@ -293,12 +312,12 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
 void	my_mlx_pixel_put_minimap(t_game *game, int x, int y, int color);
 bool	hit_wall(t_game *game, float x, float y);
 void	update_player(t_game *game);
-void	draw_line(t_game *game, float x1, float y1, float x2, float y2);
 float	distance(float x1, float y1, float x2, float y2);
 void	initiatize_rayfacing(t_game *game, float ray_angle, int i);
 void	cast_one_ray(t_game *game, int i);
 void	store_final_hit(t_game *game, float h_dist, float v_dist, int i);
 void	render_3d_projaction(t_game *game);
+void	render_3d(t_game *game, t_3d *t, int i);
 void	render_minimap(t_game *game);
 void	load_textures(t_game *game);
 

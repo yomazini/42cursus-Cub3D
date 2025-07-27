@@ -6,11 +6,11 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 13:28:42 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/26 11:59:46 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 08:59:58 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../../includes/cub3D.h"
+#include "../../includes/cub3D.h"
 
 static void	load_one_texture(t_game *game, t_texture *tex, char *path)
 {

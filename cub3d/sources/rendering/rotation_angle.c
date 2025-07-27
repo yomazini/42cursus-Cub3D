@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast_rays.c                                        :+:      :+:    :+:   */
+/*   rotation_angle.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 09:14:57 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/27 08:30:59 by eel-garo         ###   ########.fr       */
+/*   Created: 2025/07/27 08:55:21 by eel-garo          #+#    #+#             */
+/*   Updated: 2025/07/27 09:20:13 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-void	cast_rays(t_game *game)
+float	rotation_angle(t_game *game)
 {
-	float	ray_angle;
-	int		num_rays;
-	int		i;
-
-	ray_angle = game->player.rotation_angle - (FOV / 2);
-	num_rays = WINDOW_WIDTH;
-	i = 0;
-	while (i < num_rays)
-	{
-		game->rays[i].ray_angle = ray_angle;
-		cast_one_ray(game, i);
-		ray_angle += FOV / num_rays;
-		i++;
-	}
+	if (game->map.spawn_side_face == 'E')
+		return (0);
+	else if (game->map.spawn_side_face == 'N')
+		return (1.5 * PI);
+	else if (game->map.spawn_side_face == 'W')
+		return (PI);
+	else if (game->map.spawn_side_face == 'S')
+		return (PI / 2);
+	else
+		return (-1);
 }

@@ -29,6 +29,8 @@ SRCS		=	main.c \
 				rendering/draw_3D.c \
 				rendering/render_minimap.c \
 				rendering/load_textures.c \
+				rendering/render_3d.c \
+				rendering/rotation_angle.c \
 				tools/ft_atoi.c \
 				tools/ft_isalnum.c \
 				tools/ft_isalpha.c \
