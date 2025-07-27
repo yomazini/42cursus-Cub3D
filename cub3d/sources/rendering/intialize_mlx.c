@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 09:31:10 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/27 09:21:34 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 10:04:20 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static int	key_press_hook(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
 		ft_exit(game);
-	if (keycode == KEY_UP)
+	if (keycode == KEY_W)
 		game->player.walk_direction = +1;
-	if (keycode == KEY_DOWN)
+	if (keycode == KEY_S)
 		game->player.walk_direction = -1;
 	if (keycode == KEY_D)
 		game->player.strafe_direction = +1;
@@ -45,7 +45,7 @@ static int	key_press_hook(int keycode, t_game *game)
 
 static int	key_release_hook(int keycode, t_game *game)
 {
-	if (keycode == KEY_UP || keycode == KEY_DOWN)
+	if (keycode == KEY_W || keycode == KEY_S)
 		game->player.walk_direction = 0;
 	if (keycode == KEY_A || keycode == KEY_D)
 		game->player.strafe_direction = 0;

@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 09:06:56 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 10:05:20 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_ESC 53
-# define KEY_UP 126
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
-# define KEY_DOWN 125
+// # define KEY_UP 126
+// # define KEY_DOWN 125
 
 typedef struct s_rgb
 {
