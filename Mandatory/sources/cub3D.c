@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 12:48:39 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 13:02:49 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
+// TODO: DELETE
 static void	print_parsed_data(t_game *data)
 {
 	int	i;
@@ -63,7 +64,6 @@ void	run_parser(char *filename, t_game *game)
 	validate_walls_are_closed(game);
 }
 
-
 bool	launch_game(t_game *game)
 {
 	if (!intialize_mlx(game))
@@ -71,13 +71,10 @@ bool	launch_game(t_game *game)
 	return (true);
 }
 
-// TODO: NOtes later Validate texture file formats end with xpm or if failed return sometests give invalid xpm fls {echo "dummy" > north.xpm}
-
-// TODO: SWITCH N WITH E AND VIS VERSA
-
 int	main(int ac, char **av)
 {
 	t_game	game;
+
 	if (ac != 2)
 	{
 		ft_putstr_fd("Usage: ./cub3D <path_to_map.cub>\n", 2);
