@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_map.c                                     :+:      :+:    :+:   */
+/*   validate_map_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:09 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 13:09:48 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/27 21:20:06 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	validate_rgb_value(char *val, t_rgb_validator *validator)
 	if (!is_string_purely_numeric(val))
 	{
 		(free(val), free_grid(validator->rgb_untrimmed));
-		exit_with_error("RGB values must be numeric.", validator->data);
+		exit_with_error("check your RGB Values", validator->data);
 	}
 	validator->rgb[validator->i] = ft_atoi(val);
 	if (validator->rgb[validator->i] < 0 || validator->rgb[validator->i] > 255)

@@ -5,7 +5,7 @@
 
 C 50,45,40
 
-F 85,75,65
+ F  11,22, 49
 
   SO      ./textures/pack1/South.xpm
   EA   ./textures/pack1/East.xpm

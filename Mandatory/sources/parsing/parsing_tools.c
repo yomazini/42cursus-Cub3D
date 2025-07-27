@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:56:36 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/18 17:09:21 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/27 21:18:53 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	is_string_purely_numeric(const char *str)
 			return (0);
 		i++;
 	}
+	if (ft_strlen(str) > 6)
+		return (0);
 	return (1);
 }
 

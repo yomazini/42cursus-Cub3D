@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:03 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/26 17:49:37 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/27 20:41:23 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	handle_line_split(char *line_content,
 	if (*map_has_started)
 	{
 		if (line_content[0] == '\n')
-			exit_with_error("the map has newline between it", NULL);
+			exit_with_error("check the map", NULL);
 		ft_lstadd_back(map_lines, ft_lstnew(ft_strdup(line_content)));
 	}
 	else
