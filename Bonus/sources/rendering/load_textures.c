@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 13:28:42 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/27 10:39:17 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/27 13:56:38 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	load_one_texture(t_game *game, t_texture *tex, char *path)
 	tex->img_ptr = mlx_xpm_file_to_image(game->mlx, path,
 			&tex->width, &tex->height);
 	if (!tex->img_ptr)
-		exit_with_error("Failed to load texture", game);
+		fexit(game);
 	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp,
 			&tex->line_len, &tex->endian);
 	if (!tex->addr)
-		exit_with_error("Failed to get texture data addr", game);
+		fexit(game);
 }
 
 void	load_textures(t_game *game)
