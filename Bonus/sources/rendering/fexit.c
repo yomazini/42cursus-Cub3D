@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fexit.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 10:52:25 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/27 11:16:34 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/27 13:07:28 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D_bonus.h"
 
-int    fexit(t_game *game)
+int	fexit(t_game *game)
 {
-    mlx_destroy_window(game->mlx, game->win);
-    exit(0);
+	mlx_destroy_window(game->mlx, game->win);
+	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 13:06:10 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 13:08:40 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ typedef struct s_texture
 	int		line_len;
 	int		endian;
 }	t_texture;
-
 
 typedef struct s_assets
 {
