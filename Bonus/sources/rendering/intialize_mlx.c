@@ -6,11 +6,11 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 09:31:10 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/27 11:49:42 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 12:08:56 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3D.h"
+#include "../../includes/cub3D_bonus.h"
 
 static int	game_loop(t_game *game)
 {
