@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 13:04:33 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/27 15:47:09 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,15 @@ int	main(int ac, char **av)
 	print_parsed_data(&game);
 	sleep(1);
 	launch_game(&game);
-	free_grid(game.map.grid);
-	free(game.asset_data.north_tex_path);
-	free(game.asset_data.south_tex_path);
-	free(game.asset_data.west_tex_path);
-	free(game.asset_data.east_tex_path);
+	if (game.map.grid)
+		free_grid(game.map.grid);
+	if (game.asset_data.north_tex_path)
+		free(game.asset_data.north_tex_path);
+	if (game.asset_data.south_tex_path)
+		free(game.asset_data.south_tex_path);
+	if (game.asset_data.west_tex_path)
+		free(game.asset_data.west_tex_path);
+	if (game.asset_data.east_tex_path)
+		free(game.asset_data.east_tex_path);
 	return (0);
 }

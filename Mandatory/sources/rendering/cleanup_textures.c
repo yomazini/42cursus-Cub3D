@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_textures.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 13:44:15 by eel-garo          #+#    #+#             */
-/*   Updated: 2025/07/27 13:48:22 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 15:45:48 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	cleanup_textures(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 4)

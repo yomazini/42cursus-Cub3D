@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 13:56:00 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 15:46:11 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	main(int ac, char **av)
 		free_grid(game.map.grid);
 	if (game.asset_data.north_tex_path)
 		free(game.asset_data.north_tex_path);
-	if (game.asset_data.south_tex_path)		
+	if (game.asset_data.south_tex_path)
 		free(game.asset_data.south_tex_path);
 	if (game.asset_data.west_tex_path)
 		free(game.asset_data.west_tex_path);
