@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 13:24:09 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/26 11:40:14 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/27 13:09:00 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static char	*get_color_string(char **tokens, int token_count, t_game *data)
 {
 	char	*color_string;
 
+	color_string = NULL;
 	if (token_count == 2)
 	{
 		color_string = ft_strdup(tokens[1]);
