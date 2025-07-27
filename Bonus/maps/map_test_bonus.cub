@@ -1,17 +1,17 @@
 
 
-  NO   ./textures/north_texture.xpm
+  NO   ./textures/pack1/North.xpm
 
 
 C 50,45,40
 
 F 85,75,65
 
-  SO      ./textures/south_texture.xpm
-  EA   ./textures/east_texture.xpm
+  SO      ./textures/pack1/South.xpm
+  EA   ./textures/pack1/East.xpm
 
 
-  WE ./textures/west_texture.xpm
+  WE ./textures/pack1/West.xpm
 
 
 

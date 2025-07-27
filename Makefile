@@ -1,7 +1,7 @@
 NAME		=	cub3D
 BONUS		=	cub3D_bonus
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -fsanitize=address 
 RM			=	rm -rf
 
 MAND_DIR	=	Mandatory
@@ -26,6 +26,7 @@ MAND_SRCS	=	cub3D.c \
 				rendering/cast_one_ray.c \
 				rendering/my_mlx_pixel_put.c \
 				rendering/fexit.c \
+				rendering/cleanup_textures.c \
 				rendering/draw_3D.c \
 				rendering/load_textures.c \
 				rendering/render_3d.c \
@@ -77,6 +78,7 @@ BONUS_SRCS	=	cub3D_bonus.c \
 				rendering/my_mlx_pixel_put.c \
 				rendering/my_mlx_pixel_put_minimap.c \
 				rendering/fexit.c \
+				rendering/cleanup_texture.c \
 				rendering/mouse_move.c \
 				rendering/draw_3D.c \
 				rendering/render_minimap.c \

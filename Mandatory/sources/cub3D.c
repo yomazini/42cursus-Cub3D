@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
+/*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 13:02:49 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/27 13:56:00 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	run_parser(char *filename, t_game *game)
 bool	launch_game(t_game *game)
 {
 	if (!intialize_mlx(game))
-		return (false);
+		return (fexit(game), false);
 	return (true);
 }
 
@@ -86,10 +86,15 @@ int	main(int ac, char **av)
 	sleep(1);
 	if (!launch_game(&game))
 		return (EXIT_FAILURE);
-	free_grid(game.map.grid);
-	free(game.asset_data.north_tex_path);
-	free(game.asset_data.south_tex_path);
-	free(game.asset_data.west_tex_path);
-	free(game.asset_data.east_tex_path);
+	if (game.map.grid)
+		free_grid(game.map.grid);
+	if (game.asset_data.north_tex_path)
+		free(game.asset_data.north_tex_path);
+	if (game.asset_data.south_tex_path)		
+		free(game.asset_data.south_tex_path);
+	if (game.asset_data.west_tex_path)
+		free(game.asset_data.west_tex_path);
+	if (game.asset_data.east_tex_path)
+		free(game.asset_data.east_tex_path);
 	return (0);
 }

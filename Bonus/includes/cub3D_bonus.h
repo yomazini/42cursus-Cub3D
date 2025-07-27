@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 13:02:39 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:02:39 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,5 +321,6 @@ void	render_minimap(t_game *game);
 void	load_textures(t_game *game);
 int		fexit(t_game *game);
 int		mouse_move(int x, int y, t_game *game);
+void	cleanup_textures(t_game *game);
 
 #endif

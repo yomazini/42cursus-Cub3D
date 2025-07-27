@@ -6,7 +6,7 @@
 /*   By: eel-garo <eel-garo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 13:08:40 by eel-garo         ###   ########.fr       */
+/*   Updated: 2025/07/27 13:46:38 by eel-garo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,5 +316,6 @@ void	render_3d_projaction(t_game *game);
 void	render_3d(t_game *game, t_3d *t, int i);
 void	load_textures(t_game *game);
 int		fexit(t_game *game);
+void	cleanup_textures(t_game *game);
 
 #endif
