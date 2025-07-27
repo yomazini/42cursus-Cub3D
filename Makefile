@@ -127,7 +127,7 @@ LDFLAGS		=	-L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -lm
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(MAKE) -sC $(MLX_DIR) 2>/dev/null || echo "Warning: MiniLibX not found"
+	@$(MAKE) -sC $(MLX_DIR) 2>/dev/null
 	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(NAME)
 
 $(OBJS): %.o:%.c $(HEADM) Makefile
@@ -136,7 +136,7 @@ $(OBJS): %.o:%.c $(HEADM) Makefile
 bonus: $(BONUS)
 
 $(BONUS): $(OBJB)
-	@$(MAKE) -sC $(MLX_DIR) 2>/dev/null || echo "Warning: MiniLibX not found"
+	@$(MAKE) -sC $(MLX_DIR) 2>/dev/null
 	@$(CC) $(CFLAGS) $(OBJB) $(LDFLAGS) -o $(BONUS)
 
 $(OBJB): %.o:%.c $(HEADB) Makefile
