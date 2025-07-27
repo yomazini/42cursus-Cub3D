@@ -1,7 +1,7 @@
 NAME		=	cub3D
 BONUS		=	cub3D_bonus
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -Ofast
+CFLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -rf
 
 MAND_DIR	=	Mandatory
