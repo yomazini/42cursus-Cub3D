@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 20:23:58 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 15:46:11 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/28 11:12:14 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	print_parsed_data(t_game *data)
 		data->asset_data.ceilllig_rgb.green, data->asset_data.ceilllig_rgb.blue, data->asset_data.ceilllig_rgb.hex_color);
 	printf("\n--- MAP DATA ---\n");
 	printf("Player Start: (x=%.1f, y=%.1f), Facing: %c\n", data->map.map_player_x,
-		data->map.map_player_y, data->map.spawn_side_face);
+		data->map.map_player_y, data->map.side_face);
 	printf("Map Dimensions: Height=%d, Width=%d\n", data->map.height, data->map.width);
 	printf("--- NORMALIZED MAP GRID ---\n");
 	i = 0;

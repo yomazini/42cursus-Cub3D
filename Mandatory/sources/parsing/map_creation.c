@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:46:37 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/18 17:09:18 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/28 11:12:14 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	validate_tile(t_game *data, char c, int x, int y)
 		data->map.player_count++;
 		data->map.map_player_x = (double)x + 0.5;
 		data->map.map_player_y = (double)y + 0.5;
-		data->map.spawn_side_face = c;
+		data->map.side_face = c;
 		data->map.grid[y][x] = '0';
 	}
 }

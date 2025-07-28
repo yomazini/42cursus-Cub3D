@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/27 15:51:40 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/28 11:12:14 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ typedef struct s_map
 	int		width;
 	double	map_player_x;
 	double	map_player_y;
-	char	spawn_side_face;
+	char	side_face;
 	int		player_count;
 }				t_map;
 
