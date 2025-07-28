@@ -6,7 +6,7 @@
 /*   By: ymazini <ymazini@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:18:25 by ymazini           #+#    #+#             */
-/*   Updated: 2025/07/28 11:13:04 by ymazini          ###   ########.fr       */
+/*   Updated: 2025/07/28 11:22:44 by ymazini          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,8 +269,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 char	*get_next_line(int fd);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
-
-// Parsing Func
 void	separate_file_content(t_list *all_lines, t_list **id_lines,
 			t_list **map_lines);
 void	create_map_grid(t_list **map_lines_head, t_game *data);
@@ -292,14 +290,10 @@ int		is_string_numeric(const char *str);
 int		count_char_in_string(const char *str, char c);
 char	*reconstruct_color_string(char **tokens, int token_count);
 int		handle_line(char *line, int *reach_map, t_list **head_list);
-
-// Helpers Func
 void	exit_with_error(char *message, t_game *game);
 void	free_grid(char **grid);
 int		exit_game(t_game *game);
 int		rgb_to_hex_math(int r, int g, int b);
-
-// Rendring Func
 bool	intialize_mlx(t_game *game);
 float	rotation_angle(t_game *game);
 void	ft_render(t_game *game);
