@@ -1,5 +1,7 @@
 # cub3D: A Journey into 3D Rendering with Ray Casting
 
+![](Cub3D Trailer.gif)
+
 ## 📖 Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
